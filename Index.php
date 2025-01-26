@@ -1,25 +1,25 @@
 <?php
-include 'Php2core/Init.php';
+//App Config
+define('TITLE', 'A Lonely Gameserver');
 
 //Update Core Version to App Version
 $version = clone VERSION;
-VERSION -> Update('Server Control', 1,0,0,0);
+VERSION -> Update(TITLE, 1,0,0,0);
 VERSION -> Clear();
 VERSION -> Add($version);
 
 //Start Rendering
 HTML -> Head(function(\Php2Core\NoHTML\Head $head)
 {
+    $head -> Title(TITLE);
+    $head -> Link(function(\Php2Core\NoHTML\Link $link)
+    {
+        $link -> Attributes() -> Set('rel', 'stylesheet');
+        $link -> Attributes() -> Set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
+    });
 });
 HTML -> Body(function(\Php2Core\NoHTML\Body $body)
 {
-    $body -> Raw(VERSION);
+    $body -> H2(TITLE);
 });
-
-//output
-echo '<xmp>';
-echo HTML;
-echo '</xmp><hr />';
-
-echo HTML;
 ?>
