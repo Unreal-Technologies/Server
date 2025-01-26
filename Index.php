@@ -1,9 +1,6 @@
 <?php
 //App Config
-define('DEBUG', true);
 define('TITLE', 'A Lonely Gameserver');
-
-include 'Php2core/Init.php';
 
 //Update Core Version to App Version
 $version = clone VERSION;
