@@ -7,4 +7,5 @@ RewriteRule ^index.php$ - [L]
 RewriteRule ^(([-_a-z0-9\:]+)/?)+$ index.php [NC,L]
 
 RewriteCond %{HTTP_HOST}@@%{HTTP_REFERER} !^([^@]*)@@https?://\1/.*
-RewriteRule \.(gif|jpg|jpeg|png|tif|pdf|wav|wmv|wma|avi|mov|mp4|m4v|mp3|zip|xml|js|css|ico|sql)$ - [F]
+RewriteRule \.(css|ini)$ - [F]
+RewriteRule Php2Core$ - [F]
