@@ -19,6 +19,5 @@ HTML -> Head(function(\Php2Core\NoHTML\Head $head)
 HTML -> Body(function(\Php2Core\NoHTML\Body $body)
 {
     $body -> H2(TITLE);
-    new notexistingclass();
 });
 ?>
