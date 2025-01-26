@@ -1,10 +1,25 @@
 <?php
 include 'Php2core/Init.php';
 
-$version = new Php2Core\Version('Server Control', 1,0,0,0);
-$version -> Add(VERSION);
+//Update Core Version to App Version
+$version = clone VERSION;
+VERSION -> Update('Server Control', 1,0,0,0);
+VERSION -> Clear();
+VERSION -> Add($version);
 
-echo $version;
+//Start Rendering
+HTML -> Head(function(\Php2Core\NoHTML\Head $head)
+{
+});
+HTML -> Body(function(\Php2Core\NoHTML\Body $body)
+{
+    $body -> Raw(VERSION);
+});
 
-var_dump(new Php2Core\Meuk());
+//output
+echo '<xmp>';
+echo HTML;
+echo '</xmp><hr />';
+
+echo HTML;
 ?>
