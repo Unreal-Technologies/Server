@@ -1,5 +1,29 @@
 html, body
 {
-    background-color: #1E1E1E;
-    color: #A9B7C6;
+    background-color: #1e1e1e;
+}
+
+nav a, html, body
+{
+    color: #d0d0d0 !important;
+}
+
+nav, .dropdown-content
+{
+    background-color: #2e2e2e;
+}
+
+.dropdown-content li:hover
+{
+    background-color: #3e3e3e;
+}
+
+.divider
+{
+    background-color: #4e4e4e;
+}
+
+a
+{
+    color: #039be5;
 }

@@ -1,10 +1,20 @@
 <config>
     <routes>
-        <default>index</default>
+        <default>home</default>
         <route>
             <method>get</method>
-            <match>index</match>
-            <target>pages/index.php</target>
+            <match>home</match>
+            <target>pages/home.php</target>
+        </route>
+        <route>
+            <method>get</method>
+            <match>downloads</match>
+            <target>pages/downloads.php</target>
+        </route>
+        <route>
+            <method>get</method>
+            <match>mapViewer</match>
+            <target>pages/mapViewer.php</target>
         </route>
     </routes>
 </config>

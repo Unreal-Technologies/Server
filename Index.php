@@ -20,11 +20,22 @@ HTML -> Head(function(\Php2Core\NoHTML\Head $head)
 });
 HTML -> Body(function(\Php2Core\NoHTML\Body $body)
 {
-    $body -> H2(TITLE);
+    $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
+    $links = [
+        ['Home', $dirname.'/home'],
+        ['Map Viewer', $dirname.'/mapViewer'],
+        ['Downloads', $dirname.'/downloads'],
+        ['Drop', [
+            ['Link1', $dirname.'/link1'],
+            ['Link2', $dirname.'/link2'],
+            null,
+            ['Link3', $dirname.'/link3']
+        ]]
+    ];
     
-    echo '<xmp>';
-    print_r(ROUTE);
-    print_r(CONFIGURATION);
-    echo '</xmp>';
+    $body -> NavigationMA($links);
+
+    $body -> H2(TITLE);
+    $body -> Raw('<xmp>'.print_r(ROUTE, true).'</xmp>');
 });
 ?>
