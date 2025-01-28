@@ -1,0 +1,10 @@
+<config>
+    <routes>
+        <default>index</default>
+        <route>
+            <method>get</method>
+            <match>index</match>
+            <target>pages/index.php</target>
+        </route>
+    </routes>
+</config>
