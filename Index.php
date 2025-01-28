@@ -9,16 +9,19 @@ VERSION -> Clear();
 VERSION -> Add($version);
 
 //Start Rendering
-HTML -> Head(function(\Php2Core\NoHTML\Head $head)
+XHTML -> Get('head', function(Php2Core\NoHTML\XHtml $head)
 {
-    $head -> Title(TITLE);
-    $head -> Link(function(\Php2Core\NoHTML\Link $link)
+   $head -> Add('title', function(Php2Core\NoHTML\XHtml $title)
+   {
+       $title -> Text(TITLE);
+   }); 
+   $head -> Add('link', function(\Php2Core\NoHTML\XHtml $link)
     {
         $link -> Attributes() -> Set('rel', 'stylesheet');
         $link -> Attributes() -> Set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
     });
 });
-HTML -> Body(function(\Php2Core\NoHTML\Body $body)
+XHTML -> Get('body', function(Php2Core\NoHTML\XHtml $body)
 {
     $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
     $links = [
@@ -33,9 +36,15 @@ HTML -> Body(function(\Php2Core\NoHTML\Body $body)
         ]]
     ];
     
-    $body -> NavigationMA($links);
-
-    $body -> H2(TITLE);
-    $body -> Raw('<xmp>'.print_r(ROUTE, true).'</xmp>');
+    new Php2Core\NoHTML\Materialize\Navigation($body, $links);
+    
+    $body -> Add('h2', function(Php2Core\NoHTML\XHtml $h2)
+    {
+        $h2 -> Text(TITLE);
+    });
+    $body -> Add('xmp', function(Php2Core\NoHTML\XHtml $xmp)
+    {
+        $xmp -> Text(print_r(ROUTE, true));
+    });
 });
 ?>
