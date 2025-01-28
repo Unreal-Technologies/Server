@@ -38,7 +38,7 @@ XHTML -> Get('body', function(Php2Core\NoHTML\XHtml $body)
     
     new Php2Core\NoHTML\Materialize\Navigation($body, $links);
     
-    $body -> Add('h2', function(Php2Core\NoHTML\XHtml $h2)
+    $body -> Add('h3', function(Php2Core\NoHTML\XHtml $h2)
     {
         $h2 -> Text(TITLE);
     });
