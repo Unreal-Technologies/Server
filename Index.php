@@ -4,24 +4,24 @@ define('TITLE', 'A Lonely Gameserver');
 
 //Update Core Version to App Version
 $version = clone VERSION;
-VERSION -> Update(TITLE, 1,0,0,0);
-VERSION -> Clear();
-VERSION -> Add($version);
+VERSION -> update(TITLE, 1,0,0,0);
+VERSION -> clear();
+VERSION -> add($version);
 
 //Start Rendering
-XHTML -> Get('head', function(Php2Core\NoHTML\XHtml $head)
+XHTML -> get('head', function(Php2Core\NoHTML\XHtml $head)
 {
-   $head -> Add('title', function(Php2Core\NoHTML\XHtml $title)
+   $head -> add('title', function(Php2Core\NoHTML\XHtml $title)
    {
-       $title -> Text(TITLE);
+       $title -> text(TITLE);
    }); 
-   $head -> Add('link', function(\Php2Core\NoHTML\XHtml $link)
+   $head -> add('link', function(\Php2Core\NoHTML\XHtml $link)
     {
-        $link -> Attributes() -> Set('rel', 'stylesheet');
-        $link -> Attributes() -> Set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
+        $link -> attributes() -> set('rel', 'stylesheet');
+        $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
     });
 });
-XHTML -> Get('body', function(Php2Core\NoHTML\XHtml $body)
+XHTML -> get('body', function(Php2Core\NoHTML\XHtml $body)
 {
     $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
     $links = [
@@ -38,13 +38,12 @@ XHTML -> Get('body', function(Php2Core\NoHTML\XHtml $body)
     
     new Php2Core\NoHTML\Materialize\Navigation($body, $links);
     
-    $body -> Add('h3', function(Php2Core\NoHTML\XHtml $h2)
+    $body -> add('h3', function(Php2Core\NoHTML\XHtml $h2)
     {
-        $h2 -> Text(TITLE);
+        $h2 -> text(TITLE);
     });
-    $body -> Add('xmp', function(Php2Core\NoHTML\XHtml $xmp)
+    $body -> add('xmp', function(Php2Core\NoHTML\XHtml $xmp)
     {
-        $xmp -> Text(print_r(ROUTE, true));
+        $xmp -> text(print_r(ROUTE, true));
     });
 });
-?>
