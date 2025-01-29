@@ -25,15 +25,15 @@ XHTML -> get('body', function(Php2Core\NoHTML\XHtml $body)
 {
     $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
     $links = [
-        ['Home', $dirname.'/home'],
-        ['Map Viewer', $dirname.'/mapViewer'],
-        ['Downloads', $dirname.'/downloads'],
+        ['Home', $dirname.'/home', null],
+        ['Map Viewer', $dirname.'/mapViewer', null],
+        ['Downloads', $dirname.'/downloads', null],
         ['Drop', [
-            ['Link1', $dirname.'/link1'],
-            ['Link2', $dirname.'/link2'],
+            ['Link1', $dirname.'/link1', '_blank'],
+            ['Link2', $dirname.'/link2', null],
             null,
-            ['Link3', $dirname.'/link3']
-        ]]
+            ['Link3', $dirname.'/link3', null]
+        ], null]
     ];
     
     new Php2Core\NoHTML\Materialize\Navigation($body, $links);
