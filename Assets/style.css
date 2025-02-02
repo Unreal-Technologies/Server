@@ -18,7 +18,7 @@ nav, .dropdown-content
     background-color: #3e3e3e;
 }
 
-.divider
+.divider, .vertical-divider
 {
     background-color: #4e4e4e;
 }
