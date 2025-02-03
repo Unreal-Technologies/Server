@@ -1,6 +1,6 @@
 html, body
 {
-    background-color: #1e1e1e;
+    background-color: #0d1117;
 }
 
 nav a, html, body
@@ -10,17 +10,17 @@ nav a, html, body
 
 nav, .dropdown-content
 {
-    background-color: #2e2e2e;
+    background-color: #1d2127;
 }
 
 .dropdown-content li:hover
 {
-    background-color: #3e3e3e;
+    background-color: #2d3137;
 }
 
 .divider, .vertical-divider
 {
-    background-color: #4e4e4e;
+    background-color: #3d4147;
 }
 
 a
