@@ -6,43 +6,54 @@ VERSION -> clear();
 VERSION -> add($version);
 
 //Start Rendering
-XHTML -> get('head', function(Php2Core\NoHTML\XHtml $head)
+XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
 {
-    $head -> add('title', function(Php2Core\NoHTML\XHtml $title)
+    $head -> add('title', function(Php2Core\NoHTML\Xhtml $title)
     {
         $title -> text(TITLE);
     }); 
-    $head -> add('link', function(\Php2Core\NoHTML\XHtml $link)
+    $head -> add('link', function(\Php2Core\NoHTML\Xhtml $link)
     {
         $link -> attributes() -> set('rel', 'stylesheet');
         $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
     });
 });
-XHTML -> get('body', function(Php2Core\NoHTML\XHtml $body)
+
+XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 {
-    $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
+    $baseUrl = Php2Core::baseUrl();
     
     $navBar = new \Php2Core\NoHTML\Materialize\Navigation();
-    $navBar -> link('Home', $dirname.'/home');
-    $navBar -> seperator();
-    $navBar -> link('Map Viewer', $dirname.'/mapViewer');
-    $navBar -> link('Downloads', $dirname.'/downloads');
-    $navBar -> seperator();
-    $navBar -> submenu('Drop', function(\Php2Core\NoHTML\Materialize\Submenu $drop) use($dirname)
-    {
-        $drop -> link('Link1', $dirname.'/link1', '_blank');
-        $drop -> link('Link2', $dirname.'/link2');
-        $drop -> seperator();
-        $drop -> link('Link3', $dirname.'/link3');
-    });
+    $navBar -> link('Home', $baseUrl.'/home');
+    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
+    $navBar -> link('Downloads', $baseUrl.'/downloads');
     $navBar -> navBar($body);
 
-    $body -> add('h3', function(Php2Core\NoHTML\XHtml $h2)
+    $targetFile = realpath(Php2Core::root().'/Pages/'.ROUTE -> target()['target']);
+    if($targetFile === false)
     {
-        $h2 -> text(TITLE);
+        throw new \Php2Core\Exceptions\NotImplementedException('Could not find route target.');
+    }
+    
+    require_once($targetFile);
+    
+    $body -> add('div', function(\Php2Core\NoHTML\Xhtml $div)
+    {
+        $div -> attributes() -> set('id', 'copyright');
+        $div -> add('a', function(\Php2Core\NoHTML\Xhtml $a)
+        {
+            $a -> attributes() -> set('href', Php2Core::baseUrl().'/cv');
+            $a -> text('&copy; Peter Overeijnder '.date('Y'));
+        });
     });
-    $body -> add('xmp', function(Php2Core\NoHTML\XHtml $xmp)
+    
+    $body -> get('div/nav/div', function(\Php2Core\NoHTML\Xhtml $nav)
     {
-        $xmp -> text(print_r(ROUTE, true));
+        $nav -> add('a', function(Php2Core\NoHTML\Xhtml $a)
+        {
+            $a -> text(TITLE);
+            $a -> attributes() -> set('href', '#!');
+            $a -> attributes() -> set('class', 'brand-logo right');
+        });
     });
 });
