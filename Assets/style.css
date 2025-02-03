@@ -58,3 +58,47 @@ table tr th
 {
     background-color: #009900 !important;
 }
+
+#directory-render tr th
+{
+    background-color: unset;
+}
+
+#directory-render, #directory-render tr, #directory-render tr td, #directory-render tr th
+{
+    margin: 0px;
+    padding: 0px;
+    padding-left: 5px;
+    border-spacing: 0px;
+    border-width: 0px;
+    font-style: italic;
+}
+
+#directory-render tr td a
+{
+    font-style: normal;
+}
+
+#directory-render .down, #directory-render .down-right, #directory-render .right
+{
+    width: 32px;
+    height: 32px;
+}
+
+#directory-render .down
+{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAN0lEQVR42u3OsQ0AIAwDQSv7T8sCAVaAIs1Z+tLSVa/kubuf/6kyPAAAAAAAAAAAAAAAAAAAgA0rrEBsH4+MZAAAAABJRU5ErkJggg");
+    background-repeat: no-repeat;
+}
+
+#directory-render .down-right
+{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAABASURBVFhH7daxEQAgCARBtP+e1YAKwBkD95In3JDotE55lpu5zwIAAAAAAAAYuaVu/AOtPCQ3AgAAAAD4HRCxAYYXDDA46GlGAAAAAElFTkSuQmCC");
+    background-repeat: no-repeat;
+}
+
+#directory-render .right
+{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAARUlEQVR42u3RwQkAIAwEwSR/++9TC7hoC95DkD3YZ2AgpRlx3Zlzv6t4PAAAAAAAAACADxiSkwdYmW4fvAAAAAAAAAAw11pucWHSb5gnAAAAAElFTkSuQmCC");
+    background-repeat: no-repeat;
+}
