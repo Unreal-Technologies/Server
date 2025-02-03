@@ -18,6 +18,7 @@ XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
         $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
     });
 });
+
 XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 {
     $baseUrl = Php2Core::baseUrl();
@@ -28,10 +29,13 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     $navBar -> link('Downloads', $baseUrl.'/downloads');
     $navBar -> navBar($body);
 
-    $body -> add('xmp', function(Php2Core\NoHTML\Xhtml $xmp)
+    $targetFile = realpath(Php2Core::root().'/Pages/'.ROUTE -> target()['target']);
+    if($targetFile === false)
     {
-        $xmp -> text(print_r(ROUTE, true));
-    });
+        throw new \Php2Core\Exceptions\NotImplementedException('Could not find route target.');
+    }
+    
+    require_once($targetFile);
     
     $body -> add('div', function(\Php2Core\NoHTML\Xhtml $div)
     {

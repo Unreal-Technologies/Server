@@ -27,3 +27,23 @@ a
 {
     color: #039be5;
 }
+
+.container
+{
+    padding-top: 10px;
+}
+
+table tr th
+{
+    background-color: #1d2127;
+}
+
+.striped tr:nth-child(odd) td
+{
+    background-color: #0d1117;
+}
+
+.striped tr:nth-child(even) td
+{
+    background-color: #2d3137;
+}
