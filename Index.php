@@ -20,12 +20,12 @@ XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
 });
 XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 {
-    $dirname = pathinfo($_SERVER['SCRIPT_NAME'])['dirname'];
+    $baseUrl = Php2Core::baseUrl();
     
     $navBar = new \Php2Core\NoHTML\Materialize\Navigation();
-    $navBar -> link('Home', $dirname.'/home');
-    $navBar -> link('Map Viewer', $dirname.'/mapViewer');
-    $navBar -> link('Downloads', $dirname.'/downloads');
+    $navBar -> link('Home', $baseUrl.'/home');
+    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
+    $navBar -> link('Downloads', $baseUrl.'/downloads');
     $navBar -> navBar($body);
 
     $body -> add('xmp', function(Php2Core\NoHTML\Xhtml $xmp)
