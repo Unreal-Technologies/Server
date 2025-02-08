@@ -139,8 +139,4 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             });
         });
     });
-    
-    
-    
-    
 });
