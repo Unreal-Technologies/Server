@@ -4,6 +4,7 @@ namespace Code\Palworld;
 class Gvas extends \Php2Core\IO\File
 {
     private int $iSaveType = -1;
+    private ?Header $oHeader = null;
     
     #[\Override]
     public function write(string $sStream, bool $bCreateDirectory = true): void 
@@ -70,8 +71,10 @@ class Gvas extends \Php2Core\IO\File
         
         $data = unserialize($bytes);
         $this -> iSaveType = $data['type'];
+        $this -> oHeader = new Header($data['data']);
         
         echo '<xmp>';
+        print_r($this -> oHeader);
         print_r($data['data']);
         echo '</xmp>';
     }
