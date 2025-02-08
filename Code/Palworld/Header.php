@@ -1,57 +1,105 @@
 <?php
 namespace Code\Palworld;
 
-class Header extends \Php2Core\IO\Data\BinaryStreamReader
+class Header
 {
+    /**
+     * @var int
+     */
     private int $iMagic = -1;
+    
+    /**
+     * @var int
+     */
     private int $iSavegameVersion = -1;
+    
+    /**
+     * @var int
+     */
     private int $iPackageFileVersionUe4 = -1;
+    
+    /**
+     * @var int
+     */
     private int $iPackageFileVersionUe5 = -1;
+    
+    /**
+     * @var int
+     */
     private int $iEngineVersionMajor = -1;
+    
+    /**
+     * @var int
+     */
     private int $iEngineVersionMinor = -1;
+    
+    /**
+     * @var int
+     */
     private int $iEngineVersionPatch = -1;
+    
+    /**
+     * @var int
+     */
     private int $iEngineVersionChangelist = -1;
+    
+    /**
+     * @var string
+     */
     private string $sEngineVersionBranch = '';
+    
+    /**
+     * @var int
+     */
     private int $iCustomVersionFormat = -1;
+    
+    /**
+     * @var array
+     */
     private array $aCustomVersions = [];
+    
+    /**
+     * @var string
+     */
     private string $sSaveGameClassName = '';
     
-    #[\Override]
-    public function __construct(string $stream) 
+    /**
+     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
+     * @throws \Php2Core\Exceptions\NotImplementedException
+     */
+    public function __construct(\Php2Core\IO\Data\BinaryStreamReader $bsr) 
     {
-        parent::__construct($stream);
-        
-        $this -> iMagic = $this -> i32();
+        $this -> iMagic = $bsr -> i32();
         if($this -> iMagic !== 0x53415647)
         {
             throw new \Php2Core\Exceptions\NotImplementedException('Invalid Magic: '.$this -> iMagic);
         }
-        $this -> iSavegameVersion = $this -> i32();
+        $this -> iSavegameVersion = $bsr -> i32();
         if($this -> iSavegameVersion !== 3)
         {
             throw new \Php2Core\Exceptions\NotImplementedException('Expected save game version 3, got: '.$this -> iSavegameVersion);
         }
         # Unreal Engine Version
-        $this -> iPackageFileVersionUe4 = $this -> i32();
-        $this -> iPackageFileVersionUe5 = $this -> i32();
+        $this -> iPackageFileVersionUe4 = $bsr -> i32();
+        $this -> iPackageFileVersionUe5 = $bsr -> i32();
         
         # Saved Engine Version
-        $this -> iEngineVersionMajor = $this -> u16();
-        $this -> iEngineVersionMinor = $this -> u16();
-        $this -> iEngineVersionPatch = $this -> u16();
-        $this -> iEngineVersionChangelist = $this -> u32();
-        $this -> sEngineVersionBranch = $this -> fString();
+        $this -> iEngineVersionMajor = $bsr -> u16();
+        $this -> iEngineVersionMinor = $bsr -> u16();
+        $this -> iEngineVersionPatch = $bsr -> u16();
+        $this -> iEngineVersionChangelist = $bsr -> u32();
+        $this -> sEngineVersionBranch = $bsr -> fString();
         
         # Custom Version Format
-        $this -> iCustomVersionFormat = $this -> i32();
+        $this -> iCustomVersionFormat = $bsr -> i32();
         if($this -> iCustomVersionFormat !== 3)
         {
             throw \Php2Core\Exceptions\NotImplementedException('Expected custom version format 3, got: '.$this -> iCustomVersionFormat);
         }
-        $this -> aCustomVersions = $this -> tArray(function(\Php2Core\IO\Data\BinaryStreamReader $reader)
+        $this -> aCustomVersions = $bsr -> tArray(function(\Php2Core\IO\Data\BinaryStreamReader $bsr)
         {
-            return [$reader -> guid(), $reader -> i32()];
+            return [$bsr -> guid(), $bsr -> i32()];
         });
-        $this -> sSaveGameClassName = $this -> fstring();
+        $this -> sSaveGameClassName = $bsr -> fstring();
     }
 }
