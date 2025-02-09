@@ -7,14 +7,64 @@ class Sav extends \Php2Core\IO\File
      * @param \Php2Core\IO\Directory $directory
      * @return Gvas
      */
-    public function decode(\Php2Core\IO\Directory $directory): Gvas
+    public function decode(\Php2Core\IO\Directory $directory): \Php2Core\Gaming\Engines\Unreal\Gvas
     {
         $gvas = $this -> binaryDecode($this -> read());
         
-        $file = Gvas::fromDirectory($directory, $this -> basename().'.gvas');
+        $file = \Php2Core\Gaming\Engines\Unreal\Gvas::fromDirectory($directory, $this -> basename().'.gvas');
         $file -> write(serialize($gvas));
 
         return $file;
+    }
+    
+    /**
+     * @param \Php2Core\Gaming\Engines\Unreal\Gvas $gvasFile
+     * @return void
+     */
+    public function encode(\Php2Core\Gaming\Engines\Unreal\Gvas $gvasFile): void
+    {
+        $gvas = unserialize($gvasFile -> read());
+        
+        $sav = $this -> binaryEncode($gvas['data'], $gvas['type']);
+        
+        $this -> write($sav);
+    }
+    
+    /**
+    * @param string $bytes
+    * @param int $type
+    * @return string
+    */
+    private function binaryEncode(string $bytes, int $type): string
+    {
+        $enc = ZLIB_ENCODING_DEFLATE;
+        
+        $uncompressedLength = strlen($bytes);
+        $compressedData = zlib_encode($bytes, $enc);
+        $compressedLength = strlen($compressedData);
+        
+        if($type === '2')
+        {
+            $compressedData = zlib_encode($compressedData, $enc, -1);
+        }
+        
+        $upl = pack('v', $uncompressedLength);
+        $cpl = pack('v', $compressedLength);
+        while(strlen($upl) < 4)
+        {
+            $upl .= chr(0);
+        }
+        while(strlen($cpl) < 4)
+        {
+            $cpl .= chr(0);
+        }
+        
+        $result = $upl;
+        $result .= $cpl;
+        $result .= 'PlZ';
+        $result .= $type;
+        $result .= $compressedData;
+        return $result;
     }
     
     /**

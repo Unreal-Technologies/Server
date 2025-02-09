@@ -1,6 +1,5 @@
 <?php
 require_once('Code/Palworld/Sav.php');
-require_once('Code/Palworld/Gvas.php');
 
 class PalServer
 {
@@ -46,9 +45,9 @@ class PalSave
     private string $sName = '';
     
     /**
-     * @var \Code\Palworld\Gvas|null
+     * @var \Php2Core\Gaming\Engines\Unreal\Gvas|null
      */
-    private ?\Code\Palworld\Gvas $oWorldOption = null;
+    private ?\Php2Core\Gaming\Engines\Unreal\Gvas $oWorldOption = null;
     
     /**
      * @var \Code\Palworld\Sav|null
@@ -56,12 +55,12 @@ class PalSave
     private ?\Code\Palworld\Sav $oLevel = null;
     
     /**
-     * @var \Code\Palworld\Gvas|null
+     * @var \Php2Core\Gaming\Engines\Unreal\Gvas|null
      */
-    private ?\Code\Palworld\Gvas $oLevelMeta = null;
+    private ?\Php2Core\Gaming\Engines\Unreal\Gvas $oLevelMeta = null;
     
     /**
-     * @var \Code\Palworld\Gvas[]
+     * @var \Php2Core\Gaming\Engines\Unreal\Gvas[]
      */
     private array $aPlayers = [];
 
