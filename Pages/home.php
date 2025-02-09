@@ -139,137 +139,60 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             $buffer[$instance] = [$process, $selectedInfo];
         }
     }
-    $body -> add('div', function(\Php2Core\NoHTML\Xhtml $container) use($serversInstances, $buffer, $ram)
+    
+    $body -> get('div@.section/h6', function(\Php2Core\NoHTML\Xhtml $h6)
     {
-        $container -> attributes() -> set('class', 'container');
-        
-        $container -> add('div', function(\Php2Core\NoHTML\Xhtml $row) use($serversInstances, $buffer, $ram)
+        $h6 -> clear();
+        $h6 -> text('Home');
+    });
+    
+    $body -> add('div@.container/div@.row/div@.col s6 offset-s3', function(\Php2Core\NoHTML\Xhtml $col) use($serversInstances, $buffer, $ram)
+    {
+        $col -> add('table@.striped', function(\Php2Core\NoHTML\Xhtml $table) use($serversInstances, $buffer, $ram)
         {
-            $row -> attributes() -> set('class', 'row');
-            
-            $row -> add('div', function(\Php2Core\NoHTML\Xhtml $col)
+            $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($ram)
             {
-                $col -> attributes() -> set('class', 'col s3');
+                $tr -> add('th@.center-align&colspan=2') -> text('Game Servers');
+                $tr -> add('th@.center-align&colspan=2') -> text('Memory '.$ram -> format(0));
             });
-            
-            $row -> add('div', function(\Php2Core\NoHTML\Xhtml $col) use($serversInstances, $buffer, $ram)
+
+            $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr)
             {
-                $col -> attributes() -> set('class', 'col s6');
-                
-                $col -> add('table', function(\Php2Core\NoHTML\Xhtml $table) use($serversInstances, $buffer, $ram)
+                $tr -> add('th') -> text('Server');
+                $tr -> add('th') -> text('State');
+                $tr -> add('th') -> text('Usage');
+                $tr -> add('th') -> text('%');
+                $tr -> add('th') -> text('PID');
+                $tr -> add('th') -> text('Uptime');
+            });
+
+            foreach (array_keys($serversInstances) as $instance)
+            {
+                $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram)
                 {
-                    $table -> attributes() -> set('class', 'striped');
-                    $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($ram)
-                    {
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> attributes() -> set('colspan', '2');
-                            $th -> text('Game Servers');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th) use($ram)
-                        {
-                            $th -> attributes() -> set('colspan', '2');
-                            $th -> text('Memory '.$ram -> format(0));
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> attributes() -> set('colspan', '2');
-                        });
-                    });
+                    $isActive = isset($buffer[$instance]);
+                    $pid = $isActive ? $buffer[$instance][1] -> get('ProcessId') : 'N/A';
+                    $memory = $isActive ? $buffer[$instance][0] -> pidMemory($pid, true) : 'N/A';
+                    $creationDate = $isActive ? $buffer[$instance][1] -> get('CreationDate') : 'N/A';
 
-                    $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr)
-                    {
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('Server');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('State');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('Usage');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('%');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('PID');
-                        });
-                        $tr -> add('th', function(\Php2Core\NoHTML\Xhtml $th)
-                        {
-                            $th -> text('Uptime');
-                        });
-                    });
+                    $uptime = $isActive ? secondsToDisplay(calculateUpTime($creationDate)) : 'N/A';
+                    $memoryPerc = $isActive ?
+                        number_format(
+                            ($buffer[$instance][0] -> pidMemory($pid) / $ram -> value()) * 100,
+                            2,
+                            ',',
+                            '.'
+                        ) . ' %' :
+                        'N/A';
 
-                    foreach (array_keys($serversInstances) as $instance)
-                    {
-                        $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram)
-                        {
-                            $isActive = isset($buffer[$instance]);
-                            $pid = $isActive ? $buffer[$instance][1] -> get('ProcessId') : 'N/A';
-                            $memory = $isActive ? $buffer[$instance][0] -> pidMemory($pid, true) : 'N/A';
-                            $creationDate = $isActive ? $buffer[$instance][1] -> get('CreationDate') : 'N/A';
-
-                            $uptime = $isActive ? secondsToDisplay(calculateUpTime($creationDate)) : 'N/A';
-                            $memoryPerc = $isActive ?
-                                number_format(
-                                    ($buffer[$instance][0] -> pidMemory($pid) / $ram -> value()) * 100,
-                                    2,
-                                    ',',
-                                    '.'
-                                ) . ' %' :
-                                'N/A';
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($instance)
-                            {
-                                $td -> text($instance);
-                            });
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($isActive)
-                            {
-                                $td -> add('span', function(\Php2Core\NoHTML\Xhtml $span) use($isActive)
-                                {
-                                    $span -> attributes() -> set('class', $isActive ? 'green' : 'red');
-                                    $span -> text($isActive ? 'Online' : 'Offline');
-                                });
-                            });
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($memory)
-                            {
-                                $td -> attributes() -> set('class', 'right-align');
-                                $td -> text($memory);
-                            });
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($memoryPerc)
-                            {
-                                $td -> attributes() -> set('class', 'right-align');
-                                $td -> text($memoryPerc);
-                            });
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($pid)
-                            {
-                                $td -> attributes() -> set('class', 'right-align');
-                                $td -> text($pid);
-                            });
-
-                            $tr -> add('td', function(\Php2Core\NoHTML\Xhtml $td) use($uptime)
-                            {
-                                $td -> attributes() -> set('class', 'right-align');
-                                $td -> text($uptime);
-                            });
-                        });
-                    }
+                    $tr -> add('td') -> text($instance);
+                    $tr -> add('td/span@.'.($isActive ? 'green' : 'red')) -> text($isActive ? 'Online' : 'Offline');
+                    $tr -> add('td@.right-align') -> text($memory);
+                    $tr -> add('td@.right-align') -> text($memoryPerc);
+                    $tr -> add('td@.right-align') -> text($pid);
+                    $tr -> add('td@.right-align') -> text($uptime);
                 });
-            });
-            
-            $row -> add('div', function(\Php2Core\NoHTML\Xhtml $col)
-            {
-                $col -> attributes() -> set('class', 'col s3');
-            });
+            }
         });
     });
 });
