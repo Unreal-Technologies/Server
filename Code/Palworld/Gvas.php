@@ -18,6 +18,11 @@ class Gvas extends \Php2Core\IO\File
      */
     private array $aProperties = [];
     
+    /**
+     * @var \Php2Core\IO\Data\BinaryStreamReader|null
+     */
+    private ?\Php2Core\IO\Data\BinaryStreamReader $bsr = null;
+    
     #[\Override]
     public function write(string $sStream, bool $bCreateDirectory = true): void 
     {
@@ -83,128 +88,122 @@ class Gvas extends \Php2Core\IO\File
         
         $data = unserialize($bytes);
         $this -> iSaveType = $data['type'];
-        $bsr = new \Php2Core\IO\Data\BinaryStreamReader($data['data']);
+        $this -> bsr = new \Php2Core\IO\Data\BinaryStreamReader($data['data']);
         
-        $this -> oHeader = new \Php2Core\Gaming\UnrealEngine\Gvas\Header($bsr);
-        $this -> aProperties = $this -> propertiesUntilEnd($bsr);
+        $this -> oHeader = new \Php2Core\Gaming\UnrealEngine\Gvas\Header($this -> bsr);
+        $this -> aProperties = $this -> propertiesUntilEnd();
+        $this -> bsr = null;
         
         $f = \Php2Core\IO\File::fromDirectory($this -> parent(), $this -> basename().'.txt');
         $f -> write(print_r($this, true));
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @return array
      */
-    private function propertiesUntilEnd(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
+    private function propertiesUntilEnd(): array
     {
         $properties = [];
         while(true)
         {
-            $name = $bsr -> fString();
+            $name = $this -> bsr -> fString();
             if($name === 'None')
             {
                 break;
             }
-            $typeName = $bsr -> fString();
-            $size = $bsr -> u64();
+            $typeName = $this -> bsr -> fString();
+            $size = $this -> bsr -> u64();
             
-            $properties[$name] = $this -> property($bsr, $name, $typeName, $size);
+            $properties[$name] = $this -> property($name, $typeName, $size);
         }
         return $properties;
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @return array
      */
-    private function struct(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
+    private function struct(): array
     {
-        $structType = $bsr -> fString();
+        $structType = $this -> bsr -> fString();
         
         return [
             'struct_type' => $structType,
-            'struct_id' => $bsr -> guid(),
-            'id' => $bsr -> optionalGuid(),
-            'value' => $this -> structValue($bsr, $structType)
+            'struct_id' => $this -> bsr -> guid(),
+            'id' => $this -> bsr -> optionalGuid(),
+            'value' => $this -> structValue($structType)
         ];
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @param string $structType
      * @return type
      */
-    private function structValue(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $structType): mixed
+    private function structValue(string $structType): mixed
     {
         switch($structType)
         {
             
             case 'LinearColor':
-                return $this -> colorDict($bsr);
+                return $this -> colorDict();
             case 'Vector':
-                return $this -> vectorDict($bsr);
+                return $this -> vectorDict();
             case 'DateTime':
-                return $bsr -> u64();
+                return $this -> bsr -> u64();
             case 'Guid':
-                return $bsr -> guid();
+                return $this -> bsr -> guid();
             case 'Quat':
-                return $this -> quatDict($bsr);
+                return $this -> quatDict();
             default:
-                return $this -> propertiesUntilEnd($bsr);
+                return $this -> propertiesUntilEnd();
         }
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @return array
      */
-    private function colorDict(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
+    private function colorDict(): array
     {
         return [
-            'r' => $bsr -> float(),
-            'g' => $bsr -> float(),
-            'b' => $bsr -> float(),
-            'a' => $bsr -> float()
+            'r' => $this -> bsr -> float(),
+            'g' => $this -> bsr -> float(),
+            'b' => $this -> bsr -> float(),
+            'a' => $this -> bsr -> float()
         ];
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @return array
      */
-    private function vectorDict(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
+    private function vectorDict(): array
     {
         return [
-            'x' => $bsr -> double(),
-            'y' => $bsr -> double(),
-            'z' => $bsr -> double()
+            'x' => $this -> bsr -> double(),
+            'y' => $this -> bsr -> double(),
+            'z' => $this -> bsr -> double()
         ];
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @return array
      */
-    private function quatDict(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
+    private function quatDict(): array
     {
         return [
-            'x' => $bsr -> double(),
-            'y' => $bsr -> double(),
-            'z' => $bsr -> double(),
-            'w' => $bsr -> double()
+            'x' => $this -> bsr -> double(),
+            'y' => $this -> bsr -> double(),
+            'z' => $this -> bsr -> double(),
+            'w' => $this -> bsr -> double()
         ];
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @param string $arrayType
      * @param int $count
      * @param int $size
      * @return array
      * @throws \Php2Core\Exceptions\NotImplementedException
      */
-    private function arrayValue(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $arrayType, int $count, int $size): array
+    private function arrayValue(string $arrayType, int $count, int $size): array
     {
         $values = [];
         $callback = null;
@@ -249,35 +248,34 @@ class Gvas extends \Php2Core\IO\File
         
         for($i=0; $i<$count; $i++)
         {
-            $values[] = $callback($bsr);
+            $values[] = $callback($this -> bsr);
         }
         
         return $values;
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @param string $arrayType
      * @param int $size
      * @return array
      */
-    private function arrayProperty(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $arrayType, int $size): array
+    private function arrayProperty(string $arrayType, int $size): array
     {
-        $count = $bsr -> u32();
+        $count = $this -> bsr -> u32();
         $value =  null;
         if($arrayType === 'StructProperty')
         {
-            $propName = $bsr -> fString();
-            $propType = $bsr -> fString();
-            $bsr -> u64();
-            $typeName = $bsr -> fString();
-            $id = $bsr -> guid();
-            $bsr -> skip(1);
+            $propName = $this -> bsr -> fString();
+            $propType = $this -> bsr -> fString();
+            $this -> bsr -> u64();
+            $typeName = $this -> bsr -> fString();
+            $id = $this -> bsr -> guid();
+            $this -> bsr -> skip(1);
             
             $propValues = [];
             for($i=0; $i<$count; $i++)
             {
-                $propValues[] = $this -> structValue($bsr, $typeName);
+                $propValues[] = $this -> structValue($typeName);
             }
             
             $value = [
@@ -291,7 +289,7 @@ class Gvas extends \Php2Core\IO\File
         else
         {
             $value = [
-                'values' => $this -> arrayValue($bsr, $arrayType, $count, $size)
+                'values' => $this -> arrayValue($arrayType, $count, $size)
             ];
         }
         return $value;
@@ -300,50 +298,48 @@ class Gvas extends \Php2Core\IO\File
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @param string $typeName
      * @param string|null $structTypeName
      * @return mixed
-     * @throws \Php2Core\Exceptions\NotImplementedException
+     * @throws \Php2Core\Exceptions\UnexpectedValueException
      */
-    private function propertyValue(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $typeName, ?string $structTypeName): mixed
+    private function propertyValue(string $typeName, ?string $structTypeName): mixed
     {
         switch($typeName)
         {
             case 'BoolProperty':
-                return $bsr -> bool();
+                return $this -> bsr -> bool();
             case 'IntProperty':
-                return $bsr -> i32();
+                return $this -> bsr -> i32();
             case 'StructProperty':
-                return $this -> structValue($bsr, $structTypeName);
+                return $this -> structValue($structTypeName);
             case 'EnumProperty':
             case 'NameProperty':
-                return $bsr -> fString();
+                return $this -> bsr -> fString();
             default:
-                throw new \Php2Core\Exceptions\NotImplementedException('Unknown property value type: '.$typeName);
+                throw new \Php2Core\Exceptions\UnexpectedValueException('Unknown property value type: '.$typeName);
         }
 
         return null;
     }
     
     /**
-     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
      * @param string $name
      * @param string $typeName
      * @param string $size
      * @return array|null
      */
-    private function property(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $name, string $typeName, string $size): ?array
+    private function property(string $name, string $typeName, string $size): ?array
     {
         $value = null;
         switch($typeName)
         {
             case 'MapProperty':
-                $keyType = $bsr -> fString();
-                $valueType = $bsr -> fString();
-                $id = $bsr -> optionalGuid();
-                $bsr -> u32();
-                $count = $bsr -> u32();
+                $keyType = $this -> bsr -> fString();
+                $valueType = $this -> bsr -> fString();
+                $id = $this -> bsr -> optionalGuid();
+                $this -> bsr -> u32();
+                $count = $this -> bsr -> u32();
                 
                 $keyStructType = null;
                 if($keyType === 'StructProperty')
@@ -362,8 +358,8 @@ class Gvas extends \Php2Core\IO\File
                 $values = [];
                 for($i=0; $i<$count; $i++)
                 {
-                    $key = $this -> propertyValue($bsr, $keyType, $keyStructType);
-                    $value = $this -> propertyValue($bsr, $valueType, $valueStructType);
+                    $key = $this -> propertyValue($keyType, $keyStructType);
+                    $value = $this -> propertyValue($valueType, $valueStructType);
                     $values[] = [
                         'key' => $key,
                         'value' => $value
@@ -380,41 +376,41 @@ class Gvas extends \Php2Core\IO\File
                 ];
                 break;
             case 'ArrayProperty':
-                $arrayType = $bsr -> fstring();
+                $arrayType = $this -> bsr -> fstring();
                 
                 $value = [
                     'array_type' => $arrayType,
-                    'id' => $bsr -> optionalGuid(),
-                    'value' => $this -> ArrayProperty($bsr, $arrayType, $size - 4)
+                    'id' => $this -> bsr -> optionalGuid(),
+                    'value' => $this -> arrayProperty($arrayType, $size - 4)
                 ];
                 break;
             case 'NameProperty':
             case 'StrProperty':
                 $value = [
-                    'id' => $bsr -> optionalGuid(),
-                    'value' => $bsr -> fString()
+                    'id' => $this -> bsr -> optionalGuid(),
+                    'value' => $this -> bsr -> fString()
                 ];
                 break;
             case 'BoolProperty':
                 $value = [
-                    'value' => $bsr -> bool(),
-                    'id' => $bsr -> optionalGuid()
+                    'value' => $this -> bsr -> bool(),
+                    'id' => $this -> bsr -> optionalGuid()
                 ];
                 break;
             case 'IntProperty':
                 $value = [
-                    'id' => $bsr -> optionalGuid(),
-                    'value' => $bsr -> i32()
+                    'id' => $this -> bsr -> optionalGuid(),
+                    'value' => $this -> bsr -> i32()
                 ];
                 break;
             case 'FloatProperty':
                 $value = [
-                    'id' => $bsr -> optionalGuid(),
-                    'value' => $bsr -> float()
+                    'id' => $this -> bsr -> optionalGuid(),
+                    'value' => $this -> bsr -> float()
                 ];
                 break;
             case 'StructProperty':
-                $value = $this -> struct($bsr);
+                $value = $this -> struct();
                 break;
             default:
                 echo '<xmp>';
@@ -425,66 +421,6 @@ class Gvas extends \Php2Core\IO\File
                 echo '</xmp>';
         }
         return $value;
-//         value = {}
-//        if path in self.custom_properties and (
-//            path is not nested_caller_path or nested_caller_path == ""
-//        ):
-//            value = self.custom_properties[path][0](self, type_name, size, path)
-//            value["custom_type"] = path
-//        elif type_name == "UInt16Property":
-//            value = {
-//                "id": self.optional_guid(),
-//                "value": self.u16(),
-//            }
-//        elif type_name == "UInt32Property":
-//            value = {
-//                "id": self.optional_guid(),
-//                "value": self.u32(),
-//            }
-//        elif type_name == "Int64Property":
-//            value = {
-//                "id": self.optional_guid(),
-//                "value": self.i64(),
-//            }
-//        elif type_name == "FixedPoint64Property":
-//            value = {
-//                "id": self.optional_guid(),
-//                "value": self.i32(),
-//            }
-
-
-//        elif type_name == "EnumProperty":
-//            enum_type = self.fstring()
-//            _id = self.optional_guid()
-//            enum_value = self.fstring()
-//            value = {
-//                "id": _id,
-//                "value": {
-//                    "type": enum_type,
-//                    "value": enum_value,
-//                },
-//            }
-
-//        elif type_name == "ByteProperty":
-//            enum_type = self.fstring()
-//            _id = self.optional_guid()
-//            if enum_type == "None":
-//                enum_value = self.byte()
-//            else:
-//                enum_value = self.fstring()
-//            value = {
-//                "id": _id,
-//                "value": {
-//                    "type": enum_type,
-//                    "value": enum_value,
-//                },
-//            }
-
-
-//        else:
-//            raise Exception(f"Unknown type: {type_name} ({path})")
-//        value["type"] = type_name
-//        return value
     }
     
     /**
