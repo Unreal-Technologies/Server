@@ -243,8 +243,6 @@ class Gvas extends \Php2Core\IO\File
                 exit;
         }
         
-        $values = [];
-        
         for($i=0; $i<$count; $i++)
         {
             $values[] = $callback($bsr);
@@ -265,30 +263,26 @@ class Gvas extends \Php2Core\IO\File
         $value =  null;
         if($arrayType === 'StructProperty')
         {
-//        if array_type == "StructProperty":
-//            prop_name = self.fstring()
-//            prop_type = self.fstring()
-//            self.u64()
-//            type_name = self.fstring()
-//            _id = self.guid()
-//            self.skip(1)
-//            prop_values = []
-//            for _ in range(count):
-//                prop_values.append(self.struct_value(type_name, f"{path}.{prop_name}"))
-//            value = {
-//                "prop_name": prop_name,
-//                "prop_type": prop_type,
-//                "values": prop_values,
-//                "type_name": type_name,
-//                "id": _id,
-//            }
+            $propName = $bsr -> fString();
+            $propType = $bsr -> fString();
+            $bsr -> u64();
+            $typeName = $bsr -> fString();
+            $id = $bsr -> guid();
+            $bsr -> skip(1);
             
-            echo '<xmp>';
-            var_dump(__FILE__.':'.__LINE__);
-            var_dumP($arrayType);
-            var_dump($size);
-            echo '</xmp>';
-            exit;
+            $propValues = [];
+            for($i=0; $i<$count; $i++)
+            {
+                $propValues[] = $this -> structValue($bsr, $typeName);
+            }
+            
+            $value = [
+                'prop_name' => $propName,
+                'prop_type' => $propType,
+                'values' => $propValues,
+                'type_name' => $typeName,
+                'id' => $id
+            ];
         }
         else
         {
@@ -301,14 +295,30 @@ class Gvas extends \Php2Core\IO\File
 
     }
     
-    private function propertyValue(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $type, ?string $structType)
+    /**
+     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
+     * @param string $typeName
+     * @param string|null $structTypeName
+     * @return mixed
+     * @throws \Php2Core\Exceptions\NotImplementedException
+     */
+    private function propertyValue(\Php2Core\IO\Data\BinaryStreamReader $bsr, string $typeName, ?string $structTypeName): mixed
     {
-        echo '<xmp>';
-        var_dump(__FILE__.':'.__LINE__);
-        var_dump($type);
-        var_dump($structType);
-        echo '</xmp>';
-        
+        switch($typeName)
+        {
+            case 'BoolProperty':
+                return $bsr -> bool();
+            case 'IntProperty':
+                return $bsr -> i32();
+            case 'StructProperty':
+                return $this -> structValue($bsr, $structTypeName);
+            case 'EnumProperty':
+            case 'NameProperty':
+                return $bsr -> fString();
+            default:
+                throw new \Php2Core\Exceptions\NotImplementedException('Unknown property value type: '.$typeName);
+        }
+
         return null;
     }
     
