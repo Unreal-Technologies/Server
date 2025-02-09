@@ -1,6 +1,4 @@
 <?php
-require_once('Code/Palworld/Sav.php');
-
 class PalServer
 {
     /**
@@ -50,9 +48,9 @@ class PalSave
     private ?\Php2Core\Gaming\Engines\Unreal\Gvas $oWorldOption = null;
     
     /**
-     * @var \Code\Palworld\Sav|null
+     * @var \Php2Core\Gaming\Games\Palworld\Sav|null
      */
-    private ?\Code\Palworld\Sav $oLevel = null;
+    private ?\Php2Core\Gaming\Games\Palworld\Sav $oLevel = null;
     
     /**
      * @var \Php2Core\Gaming\Engines\Unreal\Gvas|null
@@ -79,13 +77,13 @@ class PalSave
         }
         
         $this -> sName = $name;
-        $this -> oWorldOption = \Code\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
-        //$this -> oLevel = \Code\Palworld\Sav::fromDirectory($save, 'level.sav');
-        $this -> oLevelMeta = \Code\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
+        $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
+        //$this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
+        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
         
         foreach(\Php2Core\IO\Directory::fromDirectory($save, 'players') -> list() as $player)
         {
-            $this -> aPlayers[] = \Code\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
+            $this -> aPlayers[] = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
         }
     }
 }
