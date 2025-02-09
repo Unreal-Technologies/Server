@@ -9,9 +9,9 @@ class Gvas extends \Php2Core\IO\File
     private int $iSaveType = -1;
     
     /**
-     * @var Header|null
+     * @var \Php2Core\Gaming\UnrealEngine\Gvas\Header|null
      */
-    private ?Header $oHeader = null;
+    private ?\Php2Core\Gaming\UnrealEngine\Gvas\Header $oHeader = null;
     
     /**
      * @var array
@@ -85,13 +85,17 @@ class Gvas extends \Php2Core\IO\File
         $this -> iSaveType = $data['type'];
         $bsr = new \Php2Core\IO\Data\BinaryStreamReader($data['data']);
         
-        $this -> oHeader = new Header($bsr);
+        $this -> oHeader = new \Php2Core\Gaming\UnrealEngine\Gvas\Header($bsr);
         $this -> aProperties = $this -> propertiesUntilEnd($bsr);
         
         $f = \Php2Core\IO\File::fromDirectory($this -> parent(), $this -> basename().'.txt');
         $f -> write(print_r($this, true));
     }
     
+    /**
+     * @param \Php2Core\IO\Data\BinaryStreamReader $bsr
+     * @return array
+     */
     private function propertiesUntilEnd(\Php2Core\IO\Data\BinaryStreamReader $bsr): array
     {
         $properties = [];
