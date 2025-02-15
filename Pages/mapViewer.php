@@ -78,10 +78,6 @@ class PalSave
         
         $this -> sName = $name;
         $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
-//        
-//        
-//        $this -> oWorldOption -> set('OptionWorldData/Settings/ServerName', 'A new Server');
-        $this -> oWorldOption -> save();
         
 //        echo '<xmp>';
 //        var_dump(__FILE__.':'.__LINE__);
@@ -91,9 +87,8 @@ class PalSave
 //        echo '</xmp>';
 //        
 //        //$this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
-//        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
-//        $this -> oLevelMeta -> save();
-//        
+        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
+        
 //        foreach(\Php2Core\IO\Directory::fromDirectory($save, 'players') -> list() as $player)
 //        {
 //            $player = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
