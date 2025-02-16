@@ -11,7 +11,7 @@ XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
     $head -> add('title') -> text(TITLE);
     $head -> add('link@rel=stylesheet', function(\Php2Core\NoHTML\Xhtml $link)
     {
-        $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/Style.css')));
+        $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/style.css')));
     });
 });
 

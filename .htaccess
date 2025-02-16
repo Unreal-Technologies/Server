@@ -1,7 +1,8 @@
-php_value auto_prepend_file "Php2Core/init.php"
+php_value display_errors 1
+php_value auto_prepend_file "Php2Core/Init.php"
 
 RewriteEngine On
-RewriteBase /Server
+RewriteBase /
 
 RewriteRule ^index.php$ - [L]
 RewriteRule ^(([-_a-z0-9\:]+)/?)+$ index.php [NC,L]
