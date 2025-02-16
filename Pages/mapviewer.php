@@ -72,7 +72,10 @@ class PalSave
      */
     private array $aPlayers = [];
 
-
+	/**
+	 * @param \Php2Core\IO\Directory $save
+	 * @param string $name
+	 */
     public function __construct(\Php2Core\IO\Directory $save, string $name)
     {
         $temp = \Php2Core\IO\Directory::fromString('__TEMP__');
@@ -89,7 +92,16 @@ class PalSave
         $this -> sName = $name;
         $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
 		
-//		$this -> oWorldOption -> save();
+		
+		$this -> oWorldOption -> save();
+		
+		$new = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.gvas2');
+
+		$comp = new Php2Core\IO\Data\BinaryCompare($this -> oWorldOption, $new);
+		
+		echo $comp;
+		
+		
 //        $this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
 //        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
 //        
@@ -118,8 +130,4 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 	}
 	
     $palServer = new PalServer($palServerDir);
-    
-    echo '<xmp>';
-    print_r($palServer);
-    echo '</xmp>';
 });
