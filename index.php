@@ -21,7 +21,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     
     $navBar = new \Php2Core\NoHTML\Materialize\Navigation();
     $navBar -> link('Home', $baseUrl.'/home');
-    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
+//    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
     $navBar -> link('Downloads', $baseUrl.'/downloads');
     $navBar -> navBar($body);
 
