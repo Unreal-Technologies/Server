@@ -22,15 +22,25 @@ class PalServer
             throw new \Php2Core\Exceptions\NotImplementedException();
         }
         
+		
         foreach($saveGames -> list() as $instance)
         {
+			if($instance instanceof \Php2Core\IO\File)
+			{
+				continue;
+			}
+
             $path = $instance -> name();
             foreach($instance -> list() as $hashed)
             {
-                $path .= '/'.$hashed -> name();
-                
-                $this -> aSaves[] = new PalSave($hashed, $path);
-            }
+				if($hashed instanceof \Php2Core\IO\File)
+				{
+					continue;
+				}
+	            $path .= '/'.$hashed -> name();
+	            
+	            $this -> aSaves[] = new PalSave($hashed, $path);
+        	}
         }
     }
 }
@@ -78,13 +88,13 @@ class PalSave
         
         $this -> sName = $name;
         $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
-        //$this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
-        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
+//        $this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
+//        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
         
-        foreach(\Php2Core\IO\Directory::fromDirectory($save, 'players') -> list() as $player)
-        {
-            $this -> aPlayers[] = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
-        }
+//        foreach(\Php2Core\IO\Directory::fromDirectory($save, 'players') -> list() as $player)
+//        {
+//            $this -> aPlayers[] = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
+//        }
     }
 }
 
@@ -97,9 +107,15 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         $h6 -> text('Map Viewer');
     });
     
-    $palServer = new PalServer(\Php2Core\IO\Directory::fromString('D:\PalServer'));
+	$palServerDir = \Php2Core\IO\Directory::fromString('D:\PalServer');
+	if(!$palServerDir -> exists())
+	{
+		$palServerDir = \Php2Core\IO\Directory::fromString('/home/petero/.local/share/Steam/steamapps/compatdata/1623730/pfx/drive_c/users/steamuser/AppData/Local/');
+	}
+	
+    $palServer = new PalServer($palServerDir);
     
-//    echo '<xmp>';
-//    print_r($palServer);
-//    echo '</xmp>';
+    echo '<xmp>';
+    print_r($palServer);
+    echo '</xmp>';
 });
