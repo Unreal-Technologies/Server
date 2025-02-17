@@ -1,4 +1,5 @@
 php_value display_errors 1
+php_value memory_limit 2048M
 php_value auto_prepend_file "Php2Core/Init.php"
 
 RewriteEngine On

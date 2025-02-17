@@ -58,9 +58,9 @@ class PalSave
     private ?\Php2Core\Gaming\Engines\Unreal\Gvas $oWorldOption = null;
     
     /**
-     * @var \Php2Core\Gaming\Games\Palworld\Sav|null
+     * @var  \Php2Core\Gaming\Engines\Unreal\Gvas|null
      */
-    private ?\Php2Core\Gaming\Games\Palworld\Sav $oLevel = null;
+    private ? \Php2Core\Gaming\Engines\Unreal\Gvas $oLevel = null;
     
     /**
      * @var \Php2Core\Gaming\Engines\Unreal\Gvas|null
@@ -91,26 +91,26 @@ class PalSave
         
         $this -> sName = $name;
         $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
+		$this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'LevelMeta.sav') -> decode($temp);
+		$this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'Level.sav') -> decode($temp);
 		
+		//$this -> oLevelMeta -> save();
 		
-		$this -> oWorldOption -> save();
-		
-		$new = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.gvas2');
-
-		$comp = new Php2Core\IO\Data\BinaryCompare($this -> oWorldOption, $new);
-		
-		echo $comp;
+//		$new = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'LevelMeta.gvas2');
+//		$comp = new Php2Core\IO\Data\BinaryCompare($this -> oLevelMeta, $new);
+//		
+//		echo $comp;
 		
 		
 //        $this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'level.sav');
-//        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'levelMeta.sav') -> decode($temp);
 //        
-//        foreach(\Php2Core\IO\Directory::fromDirectory($save, 'players') -> list() as $player)
-//        {
-//            $player = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
+//        
+        foreach(\Php2Core\IO\Directory::fromDirectory($save, 'Players') -> list() as $player)
+        {
+            $player = \Php2Core\Gaming\Games\Palworld\Sav::fromString($player -> path()) -> decode($temp2);
 //            $player -> save();
-//            $this -> aPlayers[] = $player;
-//        }
+            $this -> aPlayers[] = $player;
+        }
     }
 }
 
