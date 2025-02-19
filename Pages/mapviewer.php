@@ -91,8 +91,8 @@ class PalSave
         
         $this -> sName = $name;
         $this -> oWorldOption = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'WorldOption.sav') -> decode($temp);
-		$this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'LevelMeta.sav') -> decode($temp);
-		$this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'Level.sav') -> decode($temp);
+        $this -> oLevelMeta = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'LevelMeta.sav') -> decode($temp);
+        $this -> oLevel = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($save, 'Level.sav') -> decode($temp);
 		
 		//$this -> oLevelMeta -> save();
 		
@@ -129,5 +129,5 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 		$palServerDir = \Php2Core\IO\Directory::fromString('/home/petero/.local/share/Steam/steamapps/compatdata/1623730/pfx/drive_c/users/steamuser/AppData/Local/');
 	}
 	
-    $palServer = new PalServer($palServerDir);
+    new PalServer($palServerDir);
 });
