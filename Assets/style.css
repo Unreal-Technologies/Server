@@ -3,7 +3,7 @@ html, body
     background-color: #0d1117;
 }
 
-nav a, html, body
+nav a, html, body, input
 {
     color: #d0d0d0 !important;
 }

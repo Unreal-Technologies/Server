@@ -25,9 +25,9 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     $navBar -> link('Downloads', $baseUrl.'/downloads');
     if(Php2Core::isAuthenticated())
     {
-        $navBar -> submenu('Tools', function(Php2Core\NoHTML\Materialize\Submenu $tools)
-        {
-        });
+//        $navBar -> submenu('Tools', function(Php2Core\NoHTML\Materialize\Submenu $tools)
+//        {
+//        });
     }
     $navBar -> submenu('Account', function(Php2Core\NoHTML\Materialize\Submenu $account) use($baseUrl)
     {
@@ -37,7 +37,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         }
         else
         {
-            var_dump('AUTHENTICATED');
+            $account -> link('Logout', $baseUrl.'/logout');
         }
     });
     $navBar -> navBar($body);

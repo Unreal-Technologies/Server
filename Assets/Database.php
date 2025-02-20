@@ -15,23 +15,23 @@ $routes = [
         'match' => 'home',
         'target' => 'home.php'
     ],
-    [
-        'default' => 'false',
-        'method' => 'get',
-        'match' => 'mapviewer',
-        'target' => 'mapviewer.php'
-    ],
+//    [
+//        'default' => 'false',
+//        'method' => 'get',
+//        'match' => 'mapviewer',
+//        'target' => 'mapviewer.php'
+//    ],
     [
         'default' => 'false',
         'method' => 'get',
         'match' => 'downloads',
         'target' => 'downloads.php'
-    ],
-    [
-        'default' => 'false',
-        'method' => 'get',
-        'match' => 'cv',
-        'target' => 'cv.php'
+//    ],
+//    [
+//        'default' => 'false',
+//        'method' => 'get',
+//        'match' => 'cv',
+//        'target' => 'cv.php'
     ]
 ];
 
