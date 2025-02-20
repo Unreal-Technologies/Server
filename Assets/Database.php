@@ -36,7 +36,14 @@ $routes = [
 //        'match' => 'cv',
 //        'target' => 'cv.php',
 //        'auth' => 'false'
-    ]
+    ],
+    [
+        'default' => 'false',
+        'method' => 'get',
+        'match' => 'Palworld/WorldOptions',
+        'target' => 'palworld/worldoptions.php',
+        'auth' => 'true'
+    ],
 ];
 
 foreach($routes as $route)

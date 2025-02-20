@@ -25,9 +25,10 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     $navBar -> link('Downloads', $baseUrl.'/downloads');
     if(Php2Core::isAuthenticated())
     {
-//        $navBar -> submenu('Tools', function(Php2Core\NoHTML\Materialize\Submenu $tools)
-//        {
-//        });
+        $navBar -> submenu('Palworld', function(Php2Core\NoHTML\Materialize\Submenu $palworld) use($baseUrl)
+        {
+            $palworld -> link('World Options', $baseUrl.'/Palworld/WorldOptions');
+        });
     }
     $navBar -> submenu('Account', function(Php2Core\NoHTML\Materialize\Submenu $account) use($baseUrl)
     {
