@@ -21,8 +21,25 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     
     $navBar = new \Php2Core\NoHTML\Materialize\Navigation();
     $navBar -> link('Home', $baseUrl.'/home');
-    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
+//    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
     $navBar -> link('Downloads', $baseUrl.'/downloads');
+    if(Php2Core::isAuthenticated())
+    {
+        $navBar -> submenu('Tools', function(Php2Core\NoHTML\Materialize\Submenu $tools)
+        {
+        });
+    }
+    $navBar -> submenu('Account', function(Php2Core\NoHTML\Materialize\Submenu $account) use($baseUrl)
+    {
+        if(!Php2Core::isAuthenticated())
+        {
+            $account -> link('Login', $baseUrl.'/login');
+        }
+        else
+        {
+            var_dump('AUTHENTICATED');
+        }
+    });
     $navBar -> navBar($body);
 
     $targetFile = realpath(Php2Core::root().'/Pages/'.ROUTE -> target()['target']);
