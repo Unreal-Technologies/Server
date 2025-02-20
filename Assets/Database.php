@@ -13,32 +13,36 @@ $routes = [
         'default' => 'true',
         'method' => 'get',
         'match' => 'home',
-        'target' => 'home.php'
+        'target' => 'home.php',
+        'auth' => 'false'
     ],
 //    [
 //        'default' => 'false',
 //        'method' => 'get',
 //        'match' => 'mapviewer',
-//        'target' => 'mapviewer.php'
+//        'target' => 'mapviewer.php',
+//        'auth' => 'false'
 //    ],
     [
         'default' => 'false',
         'method' => 'get',
         'match' => 'downloads',
-        'target' => 'downloads.php'
+        'target' => 'downloads.php',
+        'auth' => 'false'
 //    ],
 //    [
 //        'default' => 'false',
 //        'method' => 'get',
 //        'match' => 'cv',
-//        'target' => 'cv.php'
+//        'target' => 'cv.php',
+//        'auth' => 'false'
     ]
 ];
 
 foreach($routes as $route)
 {
-    $coreDbc -> query('insert into `route`(`instance-id`, `default`, `method`, `match`, `target`, `type`)
+    $coreDbc -> query('insert into `route`(`instance-id`, `default`, `method`, `match`, `target`, `type`, `auth`)
     values
-    ('.$instanceId.', \''.$route['default'].'\', \''.$route['method'].'\', \''.$route['match'].'\', \''.$route['target'].'\', \'file\')');
+    ('.$instanceId.', \''.$route['default'].'\', \''.$route['method'].'\', \''.$route['match'].'\', \''.$route['target'].'\', \'file\', \''.$route['auth'].'\')');
     $coreDbc -> execute();
 }
