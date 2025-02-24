@@ -44,6 +44,13 @@ $routes = [
         'target' => 'palworld/worldoptions.php',
         'auth' => 'true'
     ],
+    [
+        'default' => 'false',
+        'method' => 'get',
+        'match' => 'Palworld/Players',
+        'target' => 'palworld/xhr/players.php',
+        'auth' => 'false'
+    ],
 ];
 
 foreach($routes as $route)
