@@ -1,7 +1,7 @@
 <?php
 //Update Core Version to App Version
 $version = clone VERSION;
-VERSION -> update(TITLE, 1,0,0,0);
+VERSION -> update(TITLE, 1,0,0,1);
 VERSION -> clear();
 VERSION -> add($version);
 
