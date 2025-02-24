@@ -49,9 +49,21 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 {
     $processes = \Php2Core\IO\Process::list();
     $serversInstances = [
-        SERVER_SEVENDAYSTODIE => ['7daystodieserver.exe', '7daystodie.exe'],
-        SERVER_MINECRAFT => ['javaw.exe', 'java.exe'],
-        SERVER_PALWORLD => ['palserver-win64-shipping-cmd.exe']
+        SERVER_SEVENDAYSTODIE => [
+            'call' => null, 
+            'processes' => ['7daystodieserver.exe', '7daystodie.exe']
+        ],
+        SERVER_MINECRAFT => [
+            'call' => null, 
+            'processes' => ['javaw.exe', 'java.exe']
+        ],
+        SERVER_PALWORLD => [
+            'call' => function()
+            {
+                echo 'SETUP XHR TO PALLSERVER';
+            }, 
+            'processes' => ['palserver-win64-shipping-cmd.exe', 'palworld.exe']
+        ]
     ];
     
     $ram = \Php2Core\IO\Memory::fromInt(
@@ -66,19 +78,20 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         })
         -> firstOrDefault()
     );
-
+ 
     $active = (new Php2Core\Collections\Linq($processes))
     -> toArray(function ($x) use ($serversInstances) 
     {
         foreach ($serversInstances as $v) {
-            if (in_array(strtolower($x -> name()), $v)) {
+            if (in_array(strtolower($x -> name()), $v['processes'])) {
                 return true;
             }
             else
             {
-                foreach($v as $processName)
+                foreach($v['processes'] as $processName)
                 {
-                    if(preg_match('/^'.$x -> name().'/i',  $processName))
+                    $processedName = str_replace('/', '\\/', preg_quote($x -> name()));
+                    if(preg_match('/'.$processedName.'/i',  preg_quote($processName)) !== 0 || stristr($processedName, preg_quote($processName)))
                     {
                         return true;
                     }
@@ -87,8 +100,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         }
         return false;
     });
-    
-        
+     
     $buffer = [];
     foreach ($active as $process)
     {
@@ -101,9 +113,11 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             }
             else
             {
-                foreach($v as $processName)
+                foreach($v['processes'] as $processName)
                 {
-                    if(preg_match('/^'.$process -> name().'/i',  $processName))
+                    $processedName = str_replace('/', '\\/', preg_quote($process -> name()));
+
+                    if(preg_match('/'.$processedName.'/i',  preg_quote($processName)) !== 0 || stristr($processedName, preg_quote($processName)))
                     {
                         $instance = $k;
                         break;
@@ -168,15 +182,16 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 
             foreach (array_keys($serversInstances) as $instance)
             {
-                $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram)
+                $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram, $serversInstances, $table)
                 {
                     $isActive = isset($buffer[$instance]);
-                    $pid = $isActive ? $buffer[$instance][1] -> get('ProcessId') : 'N/A';
-                    $memory = $isActive ? $buffer[$instance][0] -> pidMemory($pid, true) : 'N/A';
-                    $creationDate = $isActive ? $buffer[$instance][1] -> get('CreationDate') : 'N/A';
+                    
+                    $pid = $isActive && $buffer[$instance][1] !== null ? $buffer[$instance][1] -> get('ProcessId') : 'N/A';
+                    $memory = $isActive && $pid !== 'N/A' ? $buffer[$instance][0] -> pidMemory($pid, true) : 'N/A';
+                    $creationDate = $isActive && $buffer[$instance][1] !== null ? $buffer[$instance][1] -> get('CreationDate') : 'N/A';
 
-                    $uptime = $isActive ? secondsToDisplay(calculateUpTime($creationDate)) : 'N/A';
-                    $memoryPerc = $isActive ?
+                    $uptime = $isActive && $creationDate !== 'N/A' ? secondsToDisplay(calculateUpTime($creationDate)) : 'N/A';
+                    $memoryPerc = $isActive && $pid !== 'N/A' ?
                         number_format(
                             ($buffer[$instance][0] -> pidMemory($pid) / $ram -> value()) * 100,
                             2,
@@ -185,6 +200,11 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
                         ) . ' %' :
                         'N/A';
 
+                    if($isActive && $serversInstances[$instance]['call'] !== null)
+                    {
+                        $serversInstances[$instance]['call']($table -> parent());
+                    }
+                    
                     $tr -> add('td') -> text($instance);
                     $tr -> add('td/span@.'.($isActive ? 'green' : 'red')) -> text($isActive ? 'Online' : 'Offline');
                     $tr -> add('td@.right-align') -> text($memory);
