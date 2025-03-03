@@ -71,15 +71,15 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
                         . 'Xhr.get(\''.$url.'\', function(data)'
                         . '{'
                             . 'document.getElementById(\'palworld-players\').innerHTML = data;'
+                            . 'setTimeout(function()'
+                            . '{'
+                                . 'getPalWorldPlayers()'
+                            . '}, 5 * 1000);'
                         . '},'
                         . 'function(data)'
                         . '{'
                             . 'alert(data)'
                         . '});'
-                        . 'setTimeout(function()'
-                        . '{'
-                            . 'getPalWorldPlayers()'
-                        . '}, 5 * 1000);'
                     . '}'
                     . 'getPalWorldPlayers();'
                 );
@@ -201,6 +201,8 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
                 $tr -> add('th') -> text('PID');
                 $tr -> add('th') -> text('Uptime');
             });
+            
+            $serversInstances[SERVER_PALWORLD]['call']($table -> parent()); //Temp
 
             foreach (array_keys($serversInstances) as $instance)
             {
