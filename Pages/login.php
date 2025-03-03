@@ -28,16 +28,12 @@ else
         });
         
         $form = new \Php2Core\NoHTML\Materialize\Form($body, Php2Core\NoHTML\Materialize\Form\Methods::Post);
-        $form -> field('username', 'Username', \Php2Core\NoHTML\Materialize\Form\InputTypes::Text);
-        $form -> field('password', 'Password', \Php2Core\NoHTML\Materialize\Form\InputTypes::Password);
-        $form -> button('Login', 'submit()', \Php2Core\NoHTML\Materialize\Columns::S1, \Php2Core\NoHTML\Materialize\Columns::S11);
-
-        $body -> add('script', function(\Php2Core\NoHTML\Xhtml $js)
+        $form -> field('username', 'Username', \Php2Core\NoHTML\Materialize\Form\InputTypes::Text, '');
+        $form -> field('password', 'Password', \Php2Core\NoHTML\Materialize\Form\InputTypes::Password, '');
+        $form -> submit('Login', function(Php2Core\NoHTML\Materialize\Form\Options $options)
         {
-            $js -> attributes() -> set('type', 'text/javascript');
-        }) -> text('function submit()'
-            . '{'
-                . 'document.forms[0].submit();'
-            . '}');
+            $options -> size(Php2Core\NoHTML\Materialize\Columns::S1);
+            $options -> offset(Php2Core\NoHTML\Materialize\Columns::S11);
+        }) -> parent() -> attributes() -> set('style', 'text-align: right;');
     });
 }

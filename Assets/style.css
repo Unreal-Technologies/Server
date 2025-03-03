@@ -3,11 +3,6 @@ html, body
     background-color: #0d1117;
 }
 
-nav a, html, body, input
-{
-    color: #d0d0d0 !important;
-}
-
 nav, .dropdown-content
 {
     background-color: #1d2127;
@@ -52,7 +47,6 @@ table tr th
 {
     background-color: #aa0000 !important;
 }
-
 
 .green
 {
@@ -101,4 +95,24 @@ table tr th
 {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAARUlEQVR42u3RwQkAIAwEwSR/++9TC7hoC95DkD3YZ2AgpRlx3Zlzv6t4PAAAAAAAAACADxiSkwdYmW4fvAAAAAAAAAAw11pucWHSb5gnAAAAAElFTkSuQmCC");
     background-repeat: no-repeat;
+}
+
+nav a, html, body, input, .select-wrapper ul li span
+{
+    color: #d0d0d0 !important;
+}
+
+input::placeholder
+{
+    color: #1d2127 !important;
+}
+
+.select-wrapper ul .disabled span
+{
+    color: #2d3137 !important;
+}
+
+.select-wrapper .caret
+{
+    fill: #2d3137 !important;
 }
