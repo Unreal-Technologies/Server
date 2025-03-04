@@ -97,7 +97,7 @@ table tr th
     background-repeat: no-repeat;
 }
 
-nav a, html, body, input, .select-wrapper ul li span
+nav a, html, body, input, .select-wrapper ul li span, .helper-text
 {
     color: #d0d0d0 !important;
 }

@@ -61,7 +61,7 @@
         <option group="Server" name="bShowPlayerList" text="Show player list" default="true" type="YesNo" required="true" />
         <option group="Server" name="ServerPlayerMaxNum" text="Server player max" default="8" type="Number" min="2" max="50" step="1" required="true" />
         <option group="Server" name="ServerName" text="ServerName" default="Default Palworld Server" type="Text" required="true" />
-        <option group="Server" name="ServerDescription" text="Server description" default="" type="Text" required="true" />
+        <option group="Server" name="ServerDescription" text="Server description" default="" type="Text" required="false" />
         <option group="Server" name="AdminPassword" text="Admin password" default="" type="Text" required="false" />
         <option group="Server" name="ServerPassword" text="Server password" default="" type="Text" required="false" />
         <option group="Server" name="PublicPort" text="Public port" default="8211" type="Number" min="1" max="65536" step="1" required="true" />
