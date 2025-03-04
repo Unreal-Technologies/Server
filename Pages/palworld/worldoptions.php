@@ -156,7 +156,7 @@ else
                             $value = $value['value'];
                         }
                         
-                        $form -> field($item['name'], $item['text'], $type, $value, function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item)
+                        $form -> field($item['name'], $item['text'], $type, $value, $item['required'] === 'true', function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item)
                         {
                             $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
                             

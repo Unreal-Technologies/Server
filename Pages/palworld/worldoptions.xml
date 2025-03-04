@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <root>
     <options path="OptionWorldData/Settings/%s">
-        <option group="World" name="DayTimeSpeedRate" text="Daytime speed rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="NightTimeSpeedRate" text="Nighttime speed rate" default="1" type="Number" min="0" max="2" step="0.001"  />
-        <option group="World" name="ExpRate" text="Experience rate" default="1" type="Number" min="0" max="2" step="0.001"  />
-        <option group="Pals" name="PalCaptureRate" text="Pal capture rate" default="1" type="Number" min="0" max="2" step="0.001"  />
-        <option group="Pals" name="PalSpawnNumRate" text="Pal spawn rate" default="1" type="Number" min="0" max="2" step="0.001"  />
-        <option group="Pals" name="PalDamageRateAttack" text="Pal damage rate attack" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Pals" name="PalDamageRateDefense" text="Pal damage rate defense" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerDamageRateAttack" text="Player damage rate attack" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerDamageRateDefense" text="Player damage rate defense" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerStomachDecreaceRate" text="Player stomach decreace rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerStaminaDecreaceRate" text="Player stamina decreace rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerAutoHPRegeneRate" text="Player auto HP regen rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Player" name="PlayerAutoHpRegeneRateInSleep" text="Player auto HP regen rate in sleep" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Pals" name="PalStomachDecreaceRate" text="Pal stomach decreace rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Pals" name="PalStaminaDecreaceRate" text="Pal stamina decreace rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Pals" name="PalAutoHPRegeneRate" text="Pal auto HP regen rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Pals" name="PalAutoHpRegeneRateInSleep" text="Pal auto HP regen rate in sleep" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="BuildObjectHpRate" text="Build object HP rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="BuildObjectDamageRate" text="Build object damage rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="BuildObjectDeteriorationDamageRate" text="Build object deterioration damage rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="CollectionDropRate" text="Collection drop rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="CollectionObjectHpRate" text="Collection object HP rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="CollectionObjectRespawnSpeedRate" text="Collection object respawn speed rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="EnemyDropItemRate" text="Enemy drop item rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="DeathPenalty" text="Death penalty" default="EPalOptionWorldDeathPenalty::None" type="Text" />
-        <option group="World" name="bEnablePlayerToPlayerDamage" text="Enable player to player damage" default="false" type="YesNo" />
-        <option group="World" name="bEnableFriendlyFire" text="Enable friendly fire" default="false" type="YesNo" />
-        <option group="World" name="bEnableInvaderEnemy" text="Enable invader enemy" default="true" type="YesNo" />
-        <option group="World" name="EnablePredatorBossPal" text="Enable predator boss pal" default="true" type="YesNo" />
-        <option group="Pals" name="bActiveUNKO" text="Active UNKO" default="true" type="YesNo" />
-        <option group="Player" name="bEnableAimAssistPad" text="Enable aim assist pad" default="false" type="YesNo" />
-        <option group="Player" name="bEnableAimAssistKeyboard" text="Enable aim assist keyboard" default="false" type="YesNo" />
-        <option group="World" name="DropItemMaxNum" text="Drop item max" default="3000" type="Number" min="1000" max="100000" step="1" />
-        <option group="World" name="DropItemMaxNum_UNKO" text="Drop item max UNKO" default="100" type="Number" min="10" max="1000" step="1" />
-        <option group="Player" name="BaseCampMaxNum" text="Basecamp max" default="5" type="Number" min="1" max="10" step="1" />
-        <option group="Guild" name="BaseCampMaxNumInGuild" text="Basecamp max in guild" default="15" type="Number" min="10" max="30" step="1" />
-        <option group="Player" name="BaseCampWorkerMaxNum" text="Basecamp worker max" default="50" type="Number" min="25" max="100" step="1" />
-        <option group="World" name="DropItemAliveMaxHours" text="Drop item alive hours" default="1" type="Number" min="1" max="5" step="1" />
-        <option group="World" name="bAutoResetGuildNoOnlinePlayers" text="Auto reset guild no online players" default="false" type="YesNo" />
-        <option group="World" name="AutoResetGuildTimeNoOnlinePlayers" text="Auto reset guild time no online players" default="72" type="Number" min="24" max="96" step="24" />
-        <option group="Guild" name="GuildPlayerMaxNum" text="Guild player max" default="4" type="Number" min="2" max="20" step="1" />
-        <option group="Pals" name="PalEggDefaultHatchingTime" text="Pal egg default hatching time" default="72"  type="Number" min="1" max="72" step="1"/>
-        <option group="Pals" name="WorkSpeedRate" text="Workspeed rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="World" name="AutoSaveSpan" text="Autosave span" default="30" type="Number" min="15" max="180" step="15" />
-        <option group="World" name="bIsMultiplay" text="Is multiplay" default="false" type="YesNo" />
-        <option group="World" name="bIsPvP" text="Is PvP" default="false" type="YesNo" />
-        <option group="World" name="bHardcore" text="Hardcore" default="false" type="YesNo" />
-        <option group="Pals" name="bPalLost" text="Pal lost" default="false" type="YesNo" />
-        <option group="Guild" name="bCanPickupOtherGuildDeathPenaltyDrop" text="Can pickup other guild death penalty drop" default="false" type="YesNo" />
-        <option group="World" name="bEnableNonLoginPenalty" text="Enable non login penalty" default="false" type="YesNo" />
-        <option group="World" name="bEnableFastTravel" text="Enable fast travel" default="true" type="YesNo" />
-        <option group="World" name="bIsStartLocationSelectByMap" text="Is start location selected by map" default="true" type="YesNo" />
-        <option group="World" name="bExistPlayerAfterLogout" text="Exist player after logout" default="true" type="YesNo" />
-        <option group="Guild" name="bEnableDefenseOtherGuildPlayer" text="Enable defense other guild player" default="false" type="YesNo" />
-        <option group="World" name="bInvisibleOtherGuildBaseCampAreaFX" text="Invisible other guild basecamp area FX" default="false" type="YesNo" />
-        <option group="World" name="bBuildAreaLimit" text="Build area limit" default="false" type="YesNo" />
-        <option group="Player" name="ItemWeightRate" text="Item weight rate" default="1" type="Number" min="0" max="2" step="0.001" />
-        <option group="Server" name="bShowPlayerList" text="Show player list" default="true" type="YesNo" />
-        <option group="Server" name="ServerPlayerMaxNum" text="Server player max" default="8" type="Number" min="2" max="50" step="1" />
-        <option group="Server" name="ServerName" text="ServerName" default="Default Palworld Server" type="Text" />
-        <option group="Server" name="ServerDescription" text="Server description" default="" type="Text" />
-        <option group="Server" name="AdminPassword" text="Admin password" default="" type="Text" />
-        <option group="Server" name="ServerPassword" text="Server password" default="" type="Text" />
-        <option group="Server" name="PublicPort" text="Public port" default="8211" type="Number" min="1" max="65536" step="1" />
-        <option group="Server" name="PublicIP" text="Public IP" default="" type="Text" />
-        <option group="Server" name="RCONEnabled" text="RCON enabled" default="false" type="YesNo" />
-        <option group="Server" name="RCONPort" text="RCON port" default="25575" type="Number" min="1" max="65536" step="1" />
-        <option group="Server" name="RESTAPIEnabled" text="REST API enabled" default="false" type="YesNo" />
-        <option group="Server" name="RESTAPIPort" text="REST API port" default="8212" type="Number" min="1" max="65536" step="1" />
-        <option group="Server" name="Region" text="Region" default="" type="Text" />
-        <option group="Server" name="BanListURL" text="Banlist URL" default="https://api.palworldgame.com/api/banlist.txt" type="Text" />
-        <option group="World" name="SupplyDropSpan" text="Supply drop span" default="30" type="Number" min="15" max="180" step="15" />
-        <option group="Server" name="ChatPostLimitPerMinute" text="Chat post limit per minute" default="15" type="Number" min="5" max="600" step="5" />
-        <option group="World" name="MaxBuildingLimitNum" text="Max building limit" default="0" type="Number" min="0" max="65536" step="1" />
-        <option group="Server" name="ServerReplicatePawnCullDistance" text="Server replicate pawn cull distance" default="15000" type="Number" min="10000" max="30000" step="5000" />
+        <option group="World" name="DayTimeSpeedRate" text="Daytime speed rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="NightTimeSpeedRate" text="Nighttime speed rate" default="1" type="Number" min="0" max="2" step="0.001" required="true"  />
+        <option group="World" name="ExpRate" text="Experience rate" default="1" type="Number" min="0" max="2" step="0.001" required="true"  />
+        <option group="Pals" name="PalCaptureRate" text="Pal capture rate" default="1" type="Number" min="0" max="2" step="0.001" required="true"  />
+        <option group="Pals" name="PalSpawnNumRate" text="Pal spawn rate" default="1" type="Number" min="0" max="2" step="0.001" required="true"  />
+        <option group="Pals" name="PalDamageRateAttack" text="Pal damage rate attack" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Pals" name="PalDamageRateDefense" text="Pal damage rate defense" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerDamageRateAttack" text="Player damage rate attack" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerDamageRateDefense" text="Player damage rate defense" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerStomachDecreaceRate" text="Player stomach decreace rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerStaminaDecreaceRate" text="Player stamina decreace rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerAutoHPRegeneRate" text="Player auto HP regen rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Player" name="PlayerAutoHpRegeneRateInSleep" text="Player auto HP regen rate in sleep" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Pals" name="PalStomachDecreaceRate" text="Pal stomach decreace rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Pals" name="PalStaminaDecreaceRate" text="Pal stamina decreace rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Pals" name="PalAutoHPRegeneRate" text="Pal auto HP regen rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Pals" name="PalAutoHpRegeneRateInSleep" text="Pal auto HP regen rate in sleep" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="BuildObjectHpRate" text="Build object HP rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="BuildObjectDamageRate" text="Build object damage rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="BuildObjectDeteriorationDamageRate" text="Build object deterioration damage rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="CollectionDropRate" text="Collection drop rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="CollectionObjectHpRate" text="Collection object HP rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="CollectionObjectRespawnSpeedRate" text="Collection object respawn speed rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="EnemyDropItemRate" text="Enemy drop item rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="DeathPenalty" text="Death penalty" default="EPalOptionWorldDeathPenalty::None" type="Text" required="true" />
+        <option group="World" name="bEnablePlayerToPlayerDamage" text="Enable player to player damage" default="false" type="YesNo" required="true" />
+        <option group="World" name="bEnableFriendlyFire" text="Enable friendly fire" default="false" type="YesNo" required="true" />
+        <option group="World" name="bEnableInvaderEnemy" text="Enable invader enemy" default="true" type="YesNo" required="true" />
+        <option group="World" name="EnablePredatorBossPal" text="Enable predator boss pal" default="true" type="YesNo" required="true" />
+        <option group="Pals" name="bActiveUNKO" text="Active UNKO" default="true" type="YesNo" required="true" />
+        <option group="Player" name="bEnableAimAssistPad" text="Enable aim assist pad" default="false" type="YesNo" required="true" />
+        <option group="Player" name="bEnableAimAssistKeyboard" text="Enable aim assist keyboard" default="false" type="YesNo" required="true" />
+        <option group="World" name="DropItemMaxNum" text="Drop item max" default="3000" type="Number" min="1000" max="100000" step="1" required="true" />
+        <option group="World" name="DropItemMaxNum_UNKO" text="Drop item max UNKO" default="100" type="Number" min="10" max="1000" step="1" required="true" />
+        <option group="Player" name="BaseCampMaxNum" text="Basecamp max" default="5" type="Number" min="1" max="10" step="1" required="true" />
+        <option group="Guild" name="BaseCampMaxNumInGuild" text="Basecamp max in guild" default="15" type="Number" min="10" max="30" step="1" required="true" />
+        <option group="Player" name="BaseCampWorkerMaxNum" text="Basecamp worker max" default="50" type="Number" min="25" max="100" step="1" required="true" />
+        <option group="World" name="DropItemAliveMaxHours" text="Drop item alive hours" default="1" type="Number" min="1" max="5" step="1" required="true" />
+        <option group="World" name="bAutoResetGuildNoOnlinePlayers" text="Auto reset guild no online players" default="false" type="YesNo" required="true" />
+        <option group="World" name="AutoResetGuildTimeNoOnlinePlayers" text="Auto reset guild time no online players" default="72" type="Number" min="24" max="96" step="24" required="true" />
+        <option group="Guild" name="GuildPlayerMaxNum" text="Guild player max" default="4" type="Number" min="2" max="20" step="1" required="true" />
+        <option group="Pals" name="PalEggDefaultHatchingTime" text="Pal egg default hatching time" default="72"  type="Number" min="1" max="72" step="1" required="true" />
+        <option group="Pals" name="WorkSpeedRate" text="Workspeed rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="World" name="AutoSaveSpan" text="Autosave span" default="30" type="Number" min="15" max="180" step="15" required="true" />
+        <option group="World" name="bIsMultiplay" text="Is multiplay" default="false" type="YesNo" required="true" />
+        <option group="World" name="bIsPvP" text="Is PvP" default="false" type="YesNo" required="true" />
+        <option group="World" name="bHardcore" text="Hardcore" default="false" type="YesNo" required="true" />
+        <option group="Pals" name="bPalLost" text="Pal lost" default="false" type="YesNo" required="true" />
+        <option group="Guild" name="bCanPickupOtherGuildDeathPenaltyDrop" text="Can pickup other guild death penalty drop" default="false" type="YesNo" required="true" />
+        <option group="World" name="bEnableNonLoginPenalty" text="Enable non login penalty" default="false" type="YesNo" required="true" />
+        <option group="World" name="bEnableFastTravel" text="Enable fast travel" default="true" type="YesNo" required="true" />
+        <option group="World" name="bIsStartLocationSelectByMap" text="Is start location selected by map" default="true" type="YesNo" required="true" />
+        <option group="World" name="bExistPlayerAfterLogout" text="Exist player after logout" default="true" type="YesNo" required="true" />
+        <option group="Guild" name="bEnableDefenseOtherGuildPlayer" text="Enable defense other guild player" default="false" type="YesNo" required="true" />
+        <option group="World" name="bInvisibleOtherGuildBaseCampAreaFX" text="Invisible other guild basecamp area FX" default="false" type="YesNo" required="true" />
+        <option group="World" name="bBuildAreaLimit" text="Build area limit" default="false" type="YesNo" required="true" />
+        <option group="Player" name="ItemWeightRate" text="Item weight rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
+        <option group="Server" name="bShowPlayerList" text="Show player list" default="true" type="YesNo" required="true" />
+        <option group="Server" name="ServerPlayerMaxNum" text="Server player max" default="8" type="Number" min="2" max="50" step="1" required="true" />
+        <option group="Server" name="ServerName" text="ServerName" default="Default Palworld Server" type="Text" required="true" />
+        <option group="Server" name="ServerDescription" text="Server description" default="" type="Text" required="true" />
+        <option group="Server" name="AdminPassword" text="Admin password" default="" type="Text" required="false" />
+        <option group="Server" name="ServerPassword" text="Server password" default="" type="Text" required="false" />
+        <option group="Server" name="PublicPort" text="Public port" default="8211" type="Number" min="1" max="65536" step="1" required="true" />
+        <option group="Server" name="PublicIP" text="Public IP" default="" type="Text" required="false" />
+        <option group="Server" name="RCONEnabled" text="RCON enabled" default="false" type="YesNo" required="true" />
+        <option group="Server" name="RCONPort" text="RCON port" default="25575" type="Number" min="1" max="65536" step="1" required="true" />
+        <option group="Server" name="RESTAPIEnabled" text="REST API enabled" default="false" type="YesNo" required="true" />
+        <option group="Server" name="RESTAPIPort" text="REST API port" default="8212" type="Number" min="1" max="65536" step="1" required="true" />
+        <option group="Server" name="Region" text="Region" default="" type="Text" required="false" />
+        <option group="Server" name="BanListURL" text="Banlist URL" default="https://api.palworldgame.com/api/banlist.txt" type="Text" required="true" />
+        <option group="World" name="SupplyDropSpan" text="Supply drop span" default="30" type="Number" min="15" max="180" step="15" required="true" />
+        <option group="Server" name="ChatPostLimitPerMinute" text="Chat post limit per minute" default="15" type="Number" min="5" max="600" step="5" required="true" />
+        <option group="World" name="MaxBuildingLimitNum" text="Max building limit" default="0" type="Number" min="0" max="65536" step="1" required="true" />
+        <option group="Server" name="ServerReplicatePawnCullDistance" text="Server replicate pawn cull distance" default="15000" type="Number" min="10000" max="30000" step="5000" required="true" />
     </options>
 </root>
