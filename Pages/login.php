@@ -28,8 +28,8 @@ else
         });
         
         $form = new \Php2Core\NoHTML\Materialize\Form($body, Php2Core\NoHTML\Materialize\Form\Methods::Post);
-        $form -> field('username', 'Username', \Php2Core\NoHTML\Materialize\Form\InputTypes::Text, '');
-        $form -> field('password', 'Password', \Php2Core\NoHTML\Materialize\Form\InputTypes::Password, '');
+        $form -> field('username', 'Username', \Php2Core\NoHTML\Materialize\Form\InputTypes::Text, '', true);
+        $form -> field('password', 'Password', \Php2Core\NoHTML\Materialize\Form\InputTypes::Password, '', true);
         $form -> submit('Login', function(Php2Core\NoHTML\Materialize\Form\Options $options)
         {
             $options -> size(Php2Core\NoHTML\Materialize\Columns::S1);
