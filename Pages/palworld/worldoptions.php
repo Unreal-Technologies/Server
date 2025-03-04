@@ -1,119 +1,4 @@
 <?php
-class WorldOption
-{
-    public const DayTimeSpeedRate =                     [ 
-            'path' => 'OptionWorldData/Settings/DayTimeSpeedRate', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ];
-    public const NightTimeSpeedRate =                   [ 
-            'path' => 'OptionWorldData/Settings/NightTimeSpeedRate', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const ExpRate =                              [ 
-            'path' => 'OptionWorldData/Settings/ExpRate', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const PalCaptureRate =                       [ 
-            'path' => 'OptionWorldData/Settings/PalCaptureRate', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const PalSpawnNumRate =                      [ 
-            'path' => 'OptionWorldData/Settings/PalSpawnNumRate', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const PalDamageRateAttack =                  [ 
-            'path' => 'OptionWorldData/Settings/PalDamageRateAttack', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const PalDamageRateDefense =                 [ 
-            'path' => 'OptionWorldData/Settings/PalDamageRateDefense', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ];
-    public const PlayerDamageRateAttack =               [ 
-            'path' => 'OptionWorldData/Settings/PlayerDamageRateAttack', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ]; 
-    public const PlayerDamageRateDefense =              [ 
-            'path' => 'OptionWorldData/Settings/PlayerDamageRateDefense', 
-            'default' => 1, 
-            'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text
-        ];
-    public const PlayerStomachDecreaceRate =            [ 'path' => 'OptionWorldData/Settings/PlayerStomachDecreaceRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PlayerStaminaDecreaceRate =            [ 'path' => 'OptionWorldData/Settings/PlayerStaminaDecreaceRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PlayerAutoHPRegeneRate =               [ 'path' => 'OptionWorldData/Settings/PlayerAutoHPRegeneRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PlayerAutoHpRegeneRateInSleep =        [ 'path' => 'OptionWorldData/Settings/PlayerAutoHpRegeneRateInSleep', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PalStomachDecreaceRate =               [ 'path' => 'OptionWorldData/Settings/PalStomachDecreaceRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PalStaminaDecreaceRate =               [ 'path' => 'OptionWorldData/Settings/PalStaminaDecreaceRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PalAutoHPRegeneRate =                  [ 'path' => 'OptionWorldData/Settings/PalAutoHPRegeneRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PalAutoHpRegeneRateInSleep =           [ 'path' => 'OptionWorldData/Settings/PalAutoHpRegeneRateInSleep', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BuildObjectHpRate =                    [ 'path' => 'OptionWorldData/Settings/BuildObjectHpRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BuildObjectDamageRate =                [ 'path' => 'OptionWorldData/Settings/BuildObjectDamageRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BuildObjectDeteriorationDamageRate =   [ 'path' => 'OptionWorldData/Settings/BuildObjectDeteriorationDamageRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const CollectionDropRate =                   [ 'path' => 'OptionWorldData/Settings/CollectionDropRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const CollectionObjectHpRate =               [ 'path' => 'OptionWorldData/Settings/CollectionObjectHpRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const CollectionObjectRespawnSpeedRate =     [ 'path' => 'OptionWorldData/Settings/CollectionObjectRespawnSpeedRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const EnemyDropItemRate =                    [ 'path' => 'OptionWorldData/Settings/EnemyDropItemRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const DeathPenalty =                         [ 'path' => 'OptionWorldData/Settings/DeathPenalty', 'default' => 'EPalOptionWorldDeathPenalty::None', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BEnablePlayerToPlayerDamage =          [ 'path' => 'OptionWorldData/Settings/bEnablePlayerToPlayerDamage', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableFriendlyFire =                  [ 'path' => 'OptionWorldData/Settings/bEnableFriendlyFire', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableInvaderEnemy =                  [ 'path' => 'OptionWorldData/Settings/bEnableInvaderEnemy', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const EnablePredatorBossPal =                [ 'path' => 'OptionWorldData/Settings/EnablePredatorBossPal', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BActiveUNKO =                          [ 'path' => 'OptionWorldData/Settings/bActiveUNKO', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableAimAssistPad =                  [ 'path' => 'OptionWorldData/Settings/bEnableAimAssistPad', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableAimAssistKeyboard =             [ 'path' => 'OptionWorldData/Settings/bEnableAimAssistKeyboard', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const DropItemMaxNum =                       [ 'path' => 'OptionWorldData/Settings/DropItemMaxNum', 'default' => 3000, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const DropItemMaxNum_UNKO =                  [ 'path' => 'OptionWorldData/Settings/DropItemMaxNum_UNKO', 'default' => 100, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BaseCampMaxNum =                       [ 'path' => 'OptionWorldData/Settings/BaseCampMaxNum', 'default' => 5, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BaseCampMaxNumInGuild =                [ 'path' => 'OptionWorldData/Settings/BaseCampMaxNumInGuild', 'default' => 15, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BaseCampWorkerMaxNum =                 [ 'path' => 'OptionWorldData/Settings/BaseCampWorkerMaxNum', 'default' => 50, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const DropItemAliveMaxHours =                [ 'path' => 'OptionWorldData/Settings/DropItemAliveMaxHours', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BAutoResetGuildNoOnlinePlayers =       [ 'path' => 'OptionWorldData/Settings/bAutoResetGuildNoOnlinePlayers', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const AutoResetGuildTimeNoOnlinePlayers =    [ 'path' => 'OptionWorldData/Settings/AutoResetGuildTimeNoOnlinePlayers', 'default' => 72, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const GuildPlayerMaxNum =                    [ 'path' => 'OptionWorldData/Settings/GuildPlayerMaxNum', 'default' => 4, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PalEggDefaultHatchingTime =            [ 'path' => 'OptionWorldData/Settings/PalEggDefaultHatchingTime', 'default' => 72, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const WorkSpeedRate =                        [ 'path' => 'OptionWorldData/Settings/WorkSpeedRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const AutoSaveSpan =                         [ 'path' => 'OptionWorldData/Settings/AutoSaveSpan', 'default' => 30, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BIsMultiplay =                         [ 'path' => 'OptionWorldData/Settings/bIsMultiplay', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BIsPvP =                               [ 'path' => 'OptionWorldData/Settings/bIsPvP', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BHardcore =                            [ 'path' => 'OptionWorldData/Settings/bHardcore', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BPalLost =                             [ 'path' => 'OptionWorldData/Settings/bPalLost', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BCanPickupOtherGuildDeathPenaltyDrop = [ 'path' => 'OptionWorldData/Settings/bCanPickupOtherGuildDeathPenaltyDrop', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableNonLoginPenalty =               [ 'path' => 'OptionWorldData/Settings/bEnableNonLoginPenalty', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableFastTravel =                    [ 'path' => 'OptionWorldData/Settings/bEnableFastTravel', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BIsStartLocationSelectByMap =          [ 'path' => 'OptionWorldData/Settings/bIsStartLocationSelectByMap', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BExistPlayerAfterLogout =              [ 'path' => 'OptionWorldData/Settings/bExistPlayerAfterLogout', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BEnableDefenseOtherGuildPlayer =       [ 'path' => 'OptionWorldData/Settings/bEnableDefenseOtherGuildPlayer', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BInvisibleOtherGuildBaseCampAreaFX =   [ 'path' => 'OptionWorldData/Settings/bInvisibleOtherGuildBaseCampAreaFX', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const BBuildAreaLimit =                      [ 'path' => 'OptionWorldData/Settings/bBuildAreaLimit', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const ItemWeightRate =                       [ 'path' => 'OptionWorldData/Settings/ItemWeightRate', 'default' => 1, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BShowPlayerList =                      [ 'path' => 'OptionWorldData/Settings/bShowPlayerList', 'default' => true, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const ServerPlayerMaxNum =                   [ 'path' => 'OptionWorldData/Settings/ServerPlayerMaxNum', 'default' => 8, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const ServerName =                           [ 'path' => 'OptionWorldData/Settings/ServerName', 'default' => 'Default Palworld Server', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const ServerDescription =                    [ 'path' => 'OptionWorldData/Settings/ServerDescription', 'default' => '', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const AdminPassword =                        [ 'path' => 'OptionWorldData/Settings/AdminPassword', 'default' => 'Hbhv22kv', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const ServerPassword =                       [ 'path' => 'OptionWorldData/Settings/ServerPassword', 'default' => 'logitech123', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PublicPort =                           [ 'path' => 'OptionWorldData/Settings/PublicPort', 'default' => 8211, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const PublicIP =                             [ 'path' => 'OptionWorldData/Settings/PublicIP', 'default' => '', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const RCONEnabled =                          [ 'path' => 'OptionWorldData/Settings/RCONEnabled', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const RCONPort =                             [ 'path' => 'OptionWorldData/Settings/RCONPort', 'default' => 25575, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const RESTAPIEnabled =                       [ 'path' => 'OptionWorldData/Settings/RESTAPIEnabled', 'default' => false, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::YesNo];
-    public const RESTAPIPort =                          [ 'path' => 'OptionWorldData/Settings/RESTAPIPort', 'default' => 8212, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const Region =                               [ 'path' => 'OptionWorldData/Settings/Region', 'default' => '', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const BanListURL =                           [ 'path' => 'OptionWorldData/Settings/BanListURL', 'default' => 'https://api.palworldgame.com/api/banlist.txt', 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const SupplyDropSpan =                       [ 'path' => 'OptionWorldData/Settings/SupplyDropSpan', 'default' => 60, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const ChatPostLimitPerMinute =               [ 'path' => 'OptionWorldData/Settings/ChatPostLimitPerMinute', 'default' => 15, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const MaxBuildingLimitNum =                  [ 'path' => 'OptionWorldData/Settings/MaxBuildingLimitNum', 'default' => 0, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-    public const ServerReplicatePawnCullDistance =      [ 'path' => 'OptionWorldData/Settings/ServerReplicatePawnCullDistance', 'default' => 15000, 'type' => \Php2Core\NoHTML\Materialize\Form\InputTypes::Text];
-}
-
 class Palworld
 {
     /**
@@ -217,7 +102,7 @@ else
     
     $worldOptionsTemp = Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.sav');
     $worldOptionsTempGvas = $worldOptionsTemp -> decode($temp);
-
+    
     if($worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
     {
         XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body) use($worldOptionsTempGvas)
@@ -228,36 +113,62 @@ else
                 $h6 -> text('Palworld - World Options');
             });
             
-            $rc = new ReflectionClass('WorldOption');
-            $form = new \Php2Core\NoHTML\Materialize\Form($body, Php2Core\NoHTML\Materialize\Form\Methods::Post);
-            
-            foreach($rc -> getConstants() as $name => $data)
+            $xml = \Php2Core\IO\Common\Xml::fromString(__DIR__.'/worldoptions.xml') -> document();
+            if($xml instanceof Php2Core\IO\Xml\Document)
             {
-                $value = $worldOptionsTempGvas -> get($data['path']);
-                $type = $data['type'];
+                $options = $xml -> children()[0];
+                $basePath = $options -> attributes()['path'];
                 
-                if($value === null)
+                $buffer = [];
+                foreach($options -> children() as $option)
                 {
-                    $value = $data['default'];
+                    $buffer[] = $option -> attributes();
                 }
                 
-                if(is_array($value))
+                $grouped = (new Php2Core\Collections\Linq($buffer)) -> orderBy(function($x)
                 {
-                    $value = $value['value'];
+                    return $x['group'].'|'.$x['text'];
+                }) -> groupBy(function($x)
+                {
+                    return $x['group'];
+                }) -> toArray();
+                
+                $form = new \Php2Core\NoHTML\Materialize\Form($body, Php2Core\NoHTML\Materialize\Form\Methods::Post);
+                
+                foreach($grouped as $group)
+                {
+                    $groupText = $group[0]['group'];
+                    $form -> reference() -> add('div@.section col s12 blue darken-4&style=text-align:center;border-radius: 10px;/h6') -> text($groupText);
+
+                    foreach($group as $item)
+                    {
+                        $path = sprintf($basePath, $item['name']);
+                        $value = $worldOptionsTempGvas -> get($path);
+                        $type = Php2Core\NoHTML\Materialize\Form\InputTypes::fromString($item['type']);
+                        
+                        if($value === null)
+                        {
+                            $value = $item['default'];
+                        }
+
+                        if(is_array($value))
+                        {
+                            $value = $value['value'];
+                        }
+                        
+                        $form -> field($item['name'], $item['text'], $type, $value, function(Php2Core\NoHTML\Materialize\Form\Options $options)
+                        {
+                            $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
+                        });
+                    }
                 }
                 
-                $form -> field(lcfirst($name), $name, $type, $value, function(Php2Core\NoHTML\Materialize\Form\Options $options)
+                $form -> submit('Save', function(Php2Core\NoHTML\Materialize\Form\Options $options)
                 {
-                    $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
-                });
+                    $options -> size(Php2Core\NoHTML\Materialize\Columns::S1);
+                    $options -> offset(Php2Core\NoHTML\Materialize\Columns::S11);
+                }) -> parent() -> attributes() -> set('style', 'text-align: right;');
             }
-            
-            $form -> submit('Save', function(Php2Core\NoHTML\Materialize\Form\Options $options)
-            {
-                $options -> size(Php2Core\NoHTML\Materialize\Columns::S1);
-                $options -> offset(Php2Core\NoHTML\Materialize\Columns::S11);
-            }) -> parent() -> attributes() -> set('style', 'text-align: right;');
         });
     }
-    
 }
