@@ -156,9 +156,16 @@ else
                             $value = $value['value'];
                         }
                         
-                        $form -> field($item['name'], $item['text'], $type, $value, function(Php2Core\NoHTML\Materialize\Form\Options $options)
+                        $form -> field($item['name'], $item['text'], $type, $value, function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item)
                         {
                             $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
+                            
+                            if($type === Php2Core\NoHTML\Materialize\Form\InputTypes::Number)
+                            {
+                                $options -> min($item['min']);
+                                $options -> max($item['max']);
+                                $options -> step($item['step']);
+                            }
                         });
                     }
                 }

@@ -46,6 +46,13 @@ $routes = [
     ],
     [
         'default' => 'false',
+        'method' => 'post',
+        'match' => 'Palworld/WorldOptions',
+        'target' => 'palworld/worldoptions.php',
+        'auth' => 'true'
+    ],
+    [
+        'default' => 'false',
         'method' => 'get',
         'match' => 'Palworld/Players',
         'target' => 'palworld/xhr/players.php',
