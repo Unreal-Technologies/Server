@@ -116,3 +116,10 @@ input::placeholder
 {
     fill: #2d3137 !important;
 }
+
+.nud
+{
+    border-color: #2d3137;
+    border-width: 1px;
+    color: #2d3137;
+}
