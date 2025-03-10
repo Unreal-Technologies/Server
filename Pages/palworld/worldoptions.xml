@@ -25,7 +25,12 @@
         <option group="World" name="CollectionObjectHpRate" text="Collection object HP rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
         <option group="World" name="CollectionObjectRespawnSpeedRate" text="Collection object respawn speed rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
         <option group="World" name="EnemyDropItemRate" text="Enemy drop item rate" default="1" type="Number" min="0" max="2" step="0.001" required="true" />
-        <option group="World" name="DeathPenalty" text="Death penalty" default="EPalOptionWorldDeathPenalty::None" type="Text" required="true" />
+        <option group="World" name="DeathPenalty" text="Death penalty" default="EPalOptionWorldDeathPenalty::None" type="Select" required="true">
+            <val value="EPalOptionWorldDeathPenalty::ItemAndEquipment" text="ItemAndEquipment" />
+            <val value="EPalOptionWorldDeathPenalty::Item" text="Item" />
+            <val value="EPalOptionWorldDeathPenalty::None" text="None" />
+            <val value="EPalOptionWorldDeathPenalty::All" text="All" />
+        </option>
         <option group="World" name="bEnablePlayerToPlayerDamage" text="Enable player to player damage" default="false" type="YesNo" required="true" />
         <option group="World" name="bEnableFriendlyFire" text="Enable friendly fire" default="false" type="YesNo" required="true" />
         <option group="World" name="bEnableInvaderEnemy" text="Enable invader enemy" default="true" type="YesNo" required="true" />

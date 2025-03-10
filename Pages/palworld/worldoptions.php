@@ -122,7 +122,15 @@ else
                 $buffer = [];
                 foreach($options -> children() as $option)
                 {
-                    $buffer[] = $option -> attributes();
+                    $set = $option -> attributes();
+                    $set['values'] = [];
+                    
+                    foreach($option -> children() as $value)
+                    {
+                        $set['values'][] = $value -> attributes();
+                    }
+                    
+                    $buffer[] = $set;
                 }
                 
                 $grouped = (new Php2Core\Collections\Linq($buffer)) -> orderBy(function($x)
@@ -156,7 +164,7 @@ else
                             $value = $value['value'];
                         }
                         
-                        $form -> field($item['name'], $item['text'], $type, $value, $item['required'] === 'true', function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item)
+                        $form -> field($item['name'], $item['text'], $type, $value, $item['required'] === 'true', function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item, $value)
                         {
                             $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
                             
@@ -165,6 +173,18 @@ else
                                 $options -> min($item['min']);
                                 $options -> max($item['max']);
                                 $options -> step($item['step']);
+                            }
+                            
+                            if($type === Php2Core\NoHTML\Materialize\Form\InputTypes::Select)
+                            {
+                                $selectOptions = new Php2Core\NoHTML\Materialize\Form\SelectOptions();
+                                
+                                foreach($item['values'] as $oVal)
+                                {
+                                    $selectOptions -> set($oVal['text'], $oVal['value'], $oVal['value'] === $value);
+                                }
+                                
+                                $options -> options($selectOptions);
                             }
                         });
                     }
