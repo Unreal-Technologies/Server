@@ -85,7 +85,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 //                );
 //            }, 
             'call' => null,
-            'processes' => ['palserver-win64-shipping-cmd.exe', 'palworld.exe']
+            'processes' => ['palserver-win64-shipping-cmd.exe', 'palworld.exe', 'palserver.exe']
         ]
     ];
     
@@ -203,8 +203,6 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
                 $tr -> add('th') -> text('Uptime');
             });
             
-            $serversInstances[SERVER_PALWORLD]['call']($table -> parent()); //Temp
-
             foreach (array_keys($serversInstances) as $instance)
             {
                 $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram, $serversInstances, $table)
