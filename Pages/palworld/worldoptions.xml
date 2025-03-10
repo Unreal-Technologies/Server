@@ -41,7 +41,7 @@
         <option group="World" name="DropItemMaxNum" text="Drop item max" default="3000" type="Number" min="1000" max="100000" step="1" required="true" />
         <option group="World" name="DropItemMaxNum_UNKO" text="Drop item max UNKO" default="100" type="Number" min="10" max="1000" step="1" required="true" />
         <option group="Player" name="BaseCampMaxNum" text="Basecamp max" default="5" type="Number" min="1" max="10" step="1" required="true" />
-        <option group="Guild" name="BaseCampMaxNumInGuild" text="Basecamp max in guild" default="15" type="Number" min="10" max="30" step="1" required="true" />
+        <option group="Guild" name="BaseCampMaxNumInGuild" text="Basecamp max in guild" default="15" type="Number" min="1" max="30" step="1" required="true" />
         <option group="Player" name="BaseCampWorkerMaxNum" text="Basecamp worker max" default="50" type="Number" min="25" max="100" step="1" required="true" />
         <option group="World" name="DropItemAliveMaxHours" text="Drop item alive hours" default="1" type="Number" min="1" max="5" step="1" required="true" />
         <option group="World" name="bAutoResetGuildNoOnlinePlayers" text="Auto reset guild no online players" default="false" type="YesNo" required="true" />
