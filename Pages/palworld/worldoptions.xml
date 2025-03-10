@@ -81,5 +81,17 @@
         <option group="Server" name="ChatPostLimitPerMinute" text="Chat post limit per minute" default="15" type="Number" min="5" max="600" step="5" required="true" />
         <option group="World" name="MaxBuildingLimitNum" text="Max building limit" default="0" type="Number" min="0" max="65536" step="1" required="true" />
         <option group="Server" name="ServerReplicatePawnCullDistance" text="Server replicate pawn cull distance" default="15000" type="Number" min="10000" max="30000" step="5000" required="true" />
+        <option group="World" name="RandomizerType" text="Randomizer type" default="EPalRandomizerType::None" type="Select" required="true">
+            <val value="EPalRandomizerType::None" text="None" />
+        </option>
+        <option group="World" name="bIsRandomizerPalLevelRandom" text="Is randomizer pal level random" default="false" type="YesNo" required="true"/>
+        <option group="World" name="RandomizerSeed" text="Randomizer seed" default="" type="Number" required="false" min="0" max="9223372036854775807" step="1"/>
+        <option group="Server" name="AllowConnectPlatform" text="Allow connect platform" default="EPalAllowConnectPlatform::Steam" type="Select" required="true">
+            <val value="EPalAllowConnectPlatform::Steam" text="Steam" />
+        </option>
+        <option group="Server" name="bIsUseBackupSaveData" text="Is use backup savedata" default="true" type="YesNo" required="true"/>
+        <option group="Server" name="LogFormatType" text="Log format type" default="EPalLogFormatType::Text" type="Select" required="true">
+            <val value="EPalLogFormatType::Text" text="Text" />
+        </option>
     </options>
 </root>

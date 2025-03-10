@@ -68,44 +68,47 @@ class Palworld
     }
 }
 
+$temp = Palworld::Temp();
+$saves = Palworld::Saves();
 
-if(ROUTE -> route()['method'] === 'post')
+$worldOptionsOrigional = \Php2Core\IO\File::fromDirectory($saves[0], 'WorldOption.sav');
+$worldOptionsOrigional -> copyTo($temp);
+
+$worldOptionsTemp = Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.sav');
+$worldOptionsTempGvas = $worldOptionsTemp -> decode($temp);
+
+$basePath = null;
+$xml = \Php2Core\IO\Common\Xml::fromString(__DIR__.'/worldoptions.xml') -> document();
+if($xml instanceof Php2Core\IO\Xml\Document)
 {
-//    $username = filter_input(INPUT_POST, 'username');
-//    $password = filter_input(INPUT_POST, 'password');
-//    
-//    $coreDbc = \Php2Core\Db\Database::getInstance('Php2Core');
-//    $coreDbc -> query('select `id` from `user` where `username` = "'.$username.'" and `password` = user_password("'.$password.'")');
-//    $result = $coreDbc -> execute();
-//    
-//    if($result['iRowCount'] === 0)
-//    {
-//        throw new \Php2Core\Exceptions\NotImplementedException('not found');
-//    }
-//    
-//    $id = $result['aResults'][0]['id'];
-//    Php2Core::session_set('user/id', $id);
-//    Php2Core::refresh(Php2Core::baseUrl());
+    $options = $xml -> children()[0];
+    $basePath = $options -> attributes()['path'];
+}
+
+if(ROUTE -> route()['method'] === 'post' && $worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
+{
+    foreach(array_keys($_POST) as $key)
+    {
+        $path = sprintf($basePath, $key);
+        $value = filter_input(INPUT_POST, $key);
+        
+        $worldOptionsTempGvas -> set($path, $value);
+    }
+    $newworldOptionsTempGvas = $worldOptionsTempGvas -> save();
+    
+    $bc = new \Php2Core\IO\Data\BinaryCompare($worldOptionsTempGvas, $newworldOptionsTempGvas);
+    echo $bc;
     
     echo '<xmp>';
     var_dump(__FILE__.':'.__LINE__);
-    print_r($_POST);
+    var_dump($newworldOptionsTempGvas);
     echo '</xmp>';
 }
 else
 {
-    $temp = Palworld::Temp();
-    $saves = Palworld::Saves();
-    
-    $worldOptionsOrigional = \Php2Core\IO\File::fromDirectory($saves[0], 'WorldOption.sav');
-    $worldOptionsOrigional -> copyTo($temp);
-    
-    $worldOptionsTemp = Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.sav');
-    $worldOptionsTempGvas = $worldOptionsTemp -> decode($temp);
-    
     if($worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
     {
-        XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body) use($worldOptionsTempGvas)
+        XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body) use($worldOptionsTempGvas, $xml, $basePath)
         {
             $body -> get('div@.section/h6', function(\Php2Core\NoHTML\Xhtml $h6)
             {
@@ -113,12 +116,10 @@ else
                 $h6 -> text('Palworld - World Options');
             });
             
-            $xml = \Php2Core\IO\Common\Xml::fromString(__DIR__.'/worldoptions.xml') -> document();
             if($xml instanceof Php2Core\IO\Xml\Document)
             {
                 $options = $xml -> children()[0];
-                $basePath = $options -> attributes()['path'];
-                
+
                 $buffer = [];
                 foreach($options -> children() as $option)
                 {
