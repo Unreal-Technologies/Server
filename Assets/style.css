@@ -122,4 +122,10 @@ input::placeholder
     border-color: #2d3137;
     border-width: 1px;
     color: #2d3137;
+    border-radius: 10px;
+}
+
+.nud:hover
+{
+    background-color: #1d2127;
 }
