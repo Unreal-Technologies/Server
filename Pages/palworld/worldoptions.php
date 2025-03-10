@@ -1,77 +1,7 @@
 <?php
-class Palworld
-{
-    /**
-     * @return Php2Core\IO\Directory
-     */
-    public static function installation(): Php2Core\IO\Directory
-    {
-        $palServerDir = \Php2Core\IO\Directory::fromString('D:\PalServer');
-	if(!$palServerDir -> exists())
-	{
-            $palServerDir = \Php2Core\IO\Directory::fromString('/home/petero/.local/share/Steam/steamapps/compatdata/1623730/pfx/drive_c/users/steamuser/AppData/Local/');
-	}
-        return $palServerDir;
-    }
-    
-    /**
-     * @return Php2Core\IO\Directory
-     */
-    public static function saves(): array
-    {
-        $saveGames = \Php2Core\IO\Directory::fromDirectory(self::installation(), 'Pal/Saved/SaveGames');
+$temp = Php2Core::temp();
 
-        $buffer = [];
-        
-        foreach($saveGames -> list() as $entry)
-        {
-            if($entry instanceof Php2Core\IO\Directory)
-            {
-                $level = \Php2Core\IO\File::fromDirectory($entry, 'Level.sav');
-                if($level -> exists())
-                {
-                    $buffer[] = $entry;
-                }
-                else
-                {
-                    foreach($entry -> list() as $subEntry)
-                    {
-                        if($subEntry instanceof Php2Core\IO\Directory)
-                        {
-                            $level = \Php2Core\IO\File::fromDirectory($subEntry, 'Level.sav');
-                            if($level -> exists())
-                            {
-                                $buffer[] = $subEntry;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        return $buffer;
-    }
-    
-    /**
-     * @return Php2Core\IO\Directory
-     */
-    public static function temp(): Php2Core\IO\Directory
-    {
-        $temp = Php2Core\IO\Directory::fromString('__TEMP__');
-        if($temp -> exists())
-        {
-            $temp -> remove();
-        }
-        $temp -> create();
-        
-        return $temp;
-    }
-}
-
-$temp = Palworld::Temp();
-$saves = Palworld::Saves();
-
-$worldOptionsOrigional = \Php2Core\IO\File::fromDirectory($saves[0], 'WorldOption.sav');
+$worldOptionsOrigional = \Php2Core\IO\File::fromString(__DIR__.'/../../Php2Core/Gaming/Assets/Palworld/WorldOption.sav');
 $worldOptionsOrigional -> copyTo($temp);
 
 $worldOptionsTemp = Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($temp, 'WorldOption.sav');
@@ -95,14 +25,18 @@ if(ROUTE -> route()['method'] === 'post' && $worldOptionsTempGvas instanceof \Ph
         $worldOptionsTempGvas -> set($path, $value);
     }
     $newworldOptionsTempGvas = $worldOptionsTempGvas -> save();
-    
-    $bc = new \Php2Core\IO\Data\BinaryCompare($worldOptionsTempGvas, $newworldOptionsTempGvas);
-    echo $bc;
-    
-    echo '<xmp>';
-    var_dump(__FILE__.':'.__LINE__);
-    var_dump($newworldOptionsTempGvas);
-    echo '</xmp>';
+
+    if($newworldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
+    {
+        $newSav = \Php2Core\Gaming\Games\Palworld\Sav::fromDirectory($newworldOptionsTempGvas -> parent(), $newworldOptionsTempGvas -> basename().'.sav');
+        if($newSav instanceof \Php2Core\Gaming\Games\Palworld\Sav)
+        {
+            $newSav -> encode($newworldOptionsTempGvas);
+        }
+        
+        $newSav -> forceDownload('WorldOption.sav');
+        exit;
+    }
 }
 else
 {
@@ -191,10 +125,10 @@ else
                     }
                 }
                 
-                $form -> submit('Save', function(Php2Core\NoHTML\Materialize\Form\Options $options)
+                $form -> submit('Download', function(Php2Core\NoHTML\Materialize\Form\Options $options)
                 {
-                    $options -> size(Php2Core\NoHTML\Materialize\Columns::S1);
-                    $options -> offset(Php2Core\NoHTML\Materialize\Columns::S11);
+                    $options -> size(Php2Core\NoHTML\Materialize\Columns::S2);
+                    $options -> offset(Php2Core\NoHTML\Materialize\Columns::S10);
                 }) -> parent() -> attributes() -> set('style', 'text-align: right;');
             }
         });
