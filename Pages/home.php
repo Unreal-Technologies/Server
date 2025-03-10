@@ -58,32 +58,33 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             'processes' => ['javaw.exe', 'java.exe']
         ],
         SERVER_PALWORLD => [
-            'call' => function(\Php2Core\NoHTML\Xhtml $div)
-            {
-                $url = Php2Core::baseUrl().'/Palworld/Players?mode=xhr';
-        
-                $div -> add('span/xmp@#palworld-players');
-                $div -> add('script', function(\Php2Core\NoHTML\Xhtml $script)
-                {
-                    $script -> attributes() -> set('type', 'text/javascript');
-                }) -> text('function getPalWorldPlayers()'
-                    . '{'
-                        . 'Xhr.get(\''.$url.'\', function(data)'
-                        . '{'
-                            . 'document.getElementById(\'palworld-players\').innerHTML = data;'
-                            . 'setTimeout(function()'
-                            . '{'
-                                . 'getPalWorldPlayers()'
-                            . '}, 5 * 1000);'
-                        . '},'
-                        . 'function(data)'
-                        . '{'
-                            . 'alert(data)'
-                        . '});'
-                    . '}'
-                    . 'getPalWorldPlayers();'
-                );
-            }, 
+//            'call' => function(\Php2Core\NoHTML\Xhtml $div)
+//            {
+//                $url = Php2Core::baseUrl().'/Palworld/Players?mode=xhr';
+//        
+//                $div -> add('span/xmp@#palworld-players');
+//                $div -> add('script', function(\Php2Core\NoHTML\Xhtml $script)
+//                {
+//                    $script -> attributes() -> set('type', 'text/javascript');
+//                }) -> text('function getPalWorldPlayers()'
+//                    . '{'
+//                        . 'Xhr.get(\''.$url.'\', function(data)'
+//                        . '{'
+//                            . 'document.getElementById(\'palworld-players\').innerHTML = data;'
+//                            . 'setTimeout(function()'
+//                            . '{'
+//                                . 'getPalWorldPlayers()'
+//                            . '}, 5 * 1000);'
+//                        . '},'
+//                        . 'function(data)'
+//                        . '{'
+//                            . 'alert(data)'
+//                        . '});'
+//                    . '}'
+//                    . 'getPalWorldPlayers();'
+//                );
+//            }, 
+            'call' => null,
             'processes' => ['palserver-win64-shipping-cmd.exe', 'palworld.exe']
         ]
     ];
