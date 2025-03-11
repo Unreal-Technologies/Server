@@ -1,6 +1,6 @@
 <?php
 //Update Core Version to App Version
-$bVersion = CORE -> get(\Php2Core\Php2Core\CoreProperties::Version);
+$bVersion = PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Version);
 
 $version = clone $bVersion;
 $bVersion -> update(TITLE, 1,0,0,2);
@@ -45,7 +45,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     });
     $navBar -> navBar($body);
 
-    $targetFile = realpath(Php2Core::root().'/Pages/'.ROUTE -> target()['target']);
+    $targetFile = realpath(PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Root) -> path().'/Pages/'.ROUTE -> target()['target']);
     
     $body -> add('div@.section/h6') -> text('-title-');
     $body -> add('div@.divider');

@@ -1,5 +1,5 @@
 <?php
-$temp = Php2Core::temp();
+$temp = PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Temp);
 
 $worldOptionsOrigional = \Php2Core\IO\File::fromString(__DIR__.'/../../Php2Core/Gaming/Assets/Palworld/WorldOption.sav');
 $worldOptionsOrigional -> copyTo($temp);
