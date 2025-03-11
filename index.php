@@ -1,9 +1,11 @@
 <?php
 //Update Core Version to App Version
-$version = clone VERSION;
-VERSION -> update(TITLE, 1,0,0,2);
-VERSION -> clear();
-VERSION -> add($version);
+$bVersion = CORE -> get(\Php2Core\Php2Core\CoreProperties::Version);
+
+$version = clone $bVersion;
+$bVersion -> update(TITLE, 1,0,0,2);
+$bVersion -> clear();
+$bVersion -> add($version);
 
 //Start Rendering
 XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
