@@ -13,13 +13,13 @@ XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
     $head -> add('title') -> text(PHP2CORE -> get(\Php2Core\CoreProperties::Title));
     $head -> add('link@rel=stylesheet', function(\Php2Core\NoHTML\Xhtml $link)
     {
-        $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/style.css')));
+        $link -> attributes() -> set('href', PHP2CORE -> physicalToRelativePath(realpath(__DIR__.'/Assets/style.css')));
     });
 });
 
 XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 {
-    $baseUrl = Php2Core::baseUrl();
+    $baseUrl = PHP2CORE -> baseUrl();
     
     $navBar = new \Php2Core\NoHTML\Materialize\Navigation();
     $navBar -> link('Home', $baseUrl.'/home');
@@ -57,7 +57,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     
     $body -> add('div@#copyright/a', function(\Php2Core\NoHTML\Xhtml $a)
     {
-        $a -> attributes() -> set('href', Php2Core::baseUrl().'/cv');
+        $a -> attributes() -> set('href', PHP2CORE -> baseUrl().'/cv');
     }) -> text('&copy; Peter Overeijnder '.date('Y'));
 
     $body -> get('div/nav/div', function(\Php2Core\NoHTML\Xhtml $nav)

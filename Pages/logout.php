@@ -1,3 +1,3 @@
 <?php
-Php2Core::session_set('user/id', null);
-Php2Core::refresh(Php2Core::baseUrl());
+PHP2CORE -> session_set('user/id', null);
+PHP2CORE -> refresh(PHP2CORE -> baseUrl());

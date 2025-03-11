@@ -14,8 +14,8 @@ if(ROUTE -> route()['method'] === 'post')
     }
     
     $id = $result['aResults'][0]['id'];
-    Php2Core::session_set('user/id', $id);
-    Php2Core::refresh(Php2Core::baseUrl());
+    PHP2CORE -> session_set('user/id', $id);
+    PHP2CORE -> refresh(PHP2CORE -> baseUrl());
 }
 else
 {
