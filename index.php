@@ -3,14 +3,14 @@
 $bVersion = PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Version);
 
 $version = clone $bVersion;
-$bVersion -> update(TITLE, 1,0,0,2);
+$bVersion -> update(PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Title), 1,0,0,2);
 $bVersion -> clear();
 $bVersion -> add($version);
 
 //Start Rendering
 XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
 {
-    $head -> add('title') -> text(TITLE);
+    $head -> add('title') -> text(PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Title));
     $head -> add('link@rel=stylesheet', function(\Php2Core\NoHTML\Xhtml $link)
     {
         $link -> attributes() -> set('href', Php2Core::PhysicalToRelativePath(realpath(__DIR__.'/Assets/style.css')));
@@ -62,6 +62,6 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 
     $body -> get('div/nav/div', function(\Php2Core\NoHTML\Xhtml $nav)
     {
-        $nav -> add('a@.brand-logo right&href=#!') -> text(TITLE);
+        $nav -> add('a@.brand-logo right&href=#!') -> text(PHP2CORE -> get(\Php2Core\Php2Core\CoreProperties::Title));
     });
 });
