@@ -1,16 +1,16 @@
 <?php
 //Update Core Version to App Version
-$bVersion = PHP2CORE -> get(\Php2Core\CoreProperties::Version);
+$bVersion = PHP2CORE -> get(\Php2Core::Version);
 
 $version = clone $bVersion;
-$bVersion -> update(PHP2CORE -> get(\Php2Core\CoreProperties::Title), 1,0,0,2);
+$bVersion -> update(PHP2CORE -> get(\Php2Core::Title), 1,0,0,2);
 $bVersion -> clear();
 $bVersion -> add($version);
 
 //Start Rendering
 XHTML -> get('head', function(Php2Core\NoHTML\Xhtml $head)
 {
-    $head -> add('title') -> text(PHP2CORE -> get(\Php2Core\CoreProperties::Title));
+    $head -> add('title') -> text(PHP2CORE -> get(\Php2Core::Title));
     $head -> add('link@rel=stylesheet', function(\Php2Core\NoHTML\Xhtml $link)
     {
         $link -> attributes() -> set('href', PHP2CORE -> physicalToRelativePath(realpath(__DIR__.'/Assets/style.css')));
@@ -45,7 +45,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     });
     $navBar -> navBar($body);
 
-    $targetFile = realpath(PHP2CORE -> get(\Php2Core\CoreProperties::Root) -> path().'/Pages/'.ROUTE -> target()['target']);
+    $targetFile = realpath(PHP2CORE -> get(\Php2Core::Root) -> path().'/Pages/'.ROUTE -> target()['target']);
     
     $body -> add('div@.section/h6') -> text('-title-');
     $body -> add('div@.divider');
@@ -62,6 +62,6 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
 
     $body -> get('div/nav/div', function(\Php2Core\NoHTML\Xhtml $nav)
     {
-        $nav -> add('a@.brand-logo right&href=#!') -> text(PHP2CORE -> get(\Php2Core\CoreProperties::Title));
+        $nav -> add('a@.brand-logo right&href=#!') -> text(PHP2CORE -> get(\Php2Core::Title));
     });
 });
