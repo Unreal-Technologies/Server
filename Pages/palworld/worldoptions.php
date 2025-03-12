@@ -42,9 +42,9 @@ else
 {
     if($worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
     {
-        XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body) use($worldOptionsTempGvas, $xml, $basePath)
+        XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body) use($worldOptionsTempGvas, $xml, $basePath)
         {
-            $body -> get('div@.section/h6', function(\Php2Core\NoHTML\Xhtml $h6)
+            $body -> get('div@.section/h6', function(\Php2Core\GUI\NoHTML\Xhtml $h6)
             {
                 $h6 -> clear();
                 $h6 -> text('Palworld - World Options');
@@ -68,7 +68,7 @@ else
                     $buffer[] = $set;
                 }
                 
-                $grouped = (new Php2Core\Collections\Linq($buffer)) -> orderBy(function($x)
+                $grouped = (new Php2Core\Data\Collections\Linq($buffer)) -> orderBy(function($x)
                 {
                     return $x['group'].'|'.$x['text'];
                 }) -> groupBy(function($x)
@@ -76,7 +76,7 @@ else
                     return $x['group'];
                 }) -> toArray();
                 
-                $form = new \Php2Core\NoHTML\Materialize\Form($body, Php2Core\NoHTML\Materialize\Form\Methods::Post);
+                $form = new \Php2Core\GUI\NoHTML\Materialize\Form($body, Php2Core\GUI\NoHTML\Materialize\Form\Methods::Post);
                 
                 foreach($grouped as $group)
                 {
@@ -87,7 +87,7 @@ else
                     {
                         $path = sprintf($basePath, $item['name']);
                         $value = $worldOptionsTempGvas -> get($path);
-                        $type = Php2Core\NoHTML\Materialize\Form\InputTypes::fromString($item['type']);
+                        $type = Php2Core\GUI\NoHTML\Materialize\Form\InputTypes::fromString($item['type']);
                         
                         if($value === null)
                         {
@@ -99,20 +99,20 @@ else
                             $value = $value['value'];
                         }
                         
-                        $form -> field($item['name'], $item['text'], $type, $value, $item['required'] === 'true', function(Php2Core\NoHTML\Materialize\Form\Options $options) use($type, $item, $value)
+                        $form -> field($item['name'], $item['text'], $type, $value, $item['required'] === 'true', function(Php2Core\GUI\NoHTML\Materialize\Form\Options $options) use($type, $item, $value)
                         {
-                            $options -> size(Php2Core\NoHTML\Materialize\Columns::S3);
+                            $options -> size(Php2Core\GUI\NoHTML\Materialize\Columns::S3);
                             
-                            if($type === Php2Core\NoHTML\Materialize\Form\InputTypes::Number)
+                            if($type === Php2Core\GUI\NoHTML\Materialize\Form\InputTypes::Number)
                             {
                                 $options -> min($item['min']);
                                 $options -> max($item['max']);
                                 $options -> step($item['step']);
                             }
                             
-                            if($type === Php2Core\NoHTML\Materialize\Form\InputTypes::Select)
+                            if($type === Php2Core\GUI\NoHTML\Materialize\Form\InputTypes::Select)
                             {
-                                $selectOptions = new Php2Core\NoHTML\Materialize\Form\SelectOptions();
+                                $selectOptions = new Php2Core\GUI\NoHTML\Materialize\Form\SelectOptions();
                                 
                                 foreach($item['values'] as $oVal)
                                 {
@@ -125,10 +125,10 @@ else
                     }
                 }
                 
-                $form -> submit('Download', function(Php2Core\NoHTML\Materialize\Form\Options $options)
+                $form -> submit('Download', function(Php2Core\GUI\NoHTML\Materialize\Form\Options $options)
                 {
-                    $options -> size(Php2Core\NoHTML\Materialize\Columns::S2);
-                    $options -> offset(Php2Core\NoHTML\Materialize\Columns::S10);
+                    $options -> size(Php2Core\GUI\NoHTML\Materialize\Columns::S2);
+                    $options -> offset(Php2Core\GUI\NoHTML\Materialize\Columns::S10);
                 }) -> parent() -> attributes() -> set('style', 'text-align: right;');
             }
         });

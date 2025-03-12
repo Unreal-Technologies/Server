@@ -45,7 +45,7 @@ function calculateUpTime(string $creationDate): int
     return $now -> format('U') - $start -> format('U');
 }
 
-XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
+XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
 {
     $processes = \Php2Core\IO\Process::list();
     $serversInstances = [
@@ -58,12 +58,12 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             'processes' => ['javaw.exe', 'java.exe']
         ],
         SERVER_PALWORLD => [
-//            'call' => function(\Php2Core\NoHTML\Xhtml $div)
+//            'call' => function(\Php2Core\GUI\NoHTML\Xhtml $div)
 //            {
 //                $url = Php2Core::baseUrl().'/Palworld/Players?mode=xhr';
 //        
 //                $div -> add('span/xmp@#palworld-players');
-//                $div -> add('script', function(\Php2Core\NoHTML\Xhtml $script)
+//                $div -> add('script', function(\Php2Core\GUI\NoHTML\Xhtml $script)
 //                {
 //                    $script -> attributes() -> set('type', 'text/javascript');
 //                }) -> text('function getPalWorldPlayers()'
@@ -90,7 +90,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     ];
     
     $ram = \Php2Core\IO\Memory::fromInt(
-        (new Php2Core\Collections\Linq(Php2Core\IO\Server::ram()))
+        (new Php2Core\Data\Collections\Linq(Php2Core\IO\Server::ram()))
         -> select(function (\Php2Core\IO\Memory $x) 
         {
             return $x -> value();
@@ -102,7 +102,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         -> firstOrDefault()
     );
  
-    $active = (new Php2Core\Collections\Linq($processes))
+    $active = (new Php2Core\Data\Collections\Linq($processes))
     -> toArray(function ($x) use ($serversInstances) 
     {
         foreach ($serversInstances as $v) {
@@ -177,23 +177,23 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
         }
     }
     
-    $body -> get('div@.section/h6', function(\Php2Core\NoHTML\Xhtml $h6)
+    $body -> get('div@.section/h6', function(\Php2Core\GUI\NoHTML\Xhtml $h6)
     {
         $h6 -> clear();
         $h6 -> text('Home');
     });
     
-    $body -> add('div@.container/div@.row/div@.col s6 offset-s3', function(\Php2Core\NoHTML\Xhtml $col) use($serversInstances, $buffer, $ram)
+    $body -> add('div@.container/div@.row/div@.col s6 offset-s3', function(\Php2Core\GUI\NoHTML\Xhtml $col) use($serversInstances, $buffer, $ram)
     {
-        $col -> add('table@.striped', function(\Php2Core\NoHTML\Xhtml $table) use($serversInstances, $buffer, $ram)
+        $col -> add('table@.striped', function(\Php2Core\GUI\NoHTML\Xhtml $table) use($serversInstances, $buffer, $ram)
         {
-            $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($ram)
+            $table -> add('tr', function(\Php2Core\GUI\NoHTML\Xhtml $tr) use($ram)
             {
                 $tr -> add('th@.center-align&colspan=2') -> text('Game Servers');
                 $tr -> add('th@.center-align&colspan=2') -> text('Memory '.$ram -> format(0));
             });
 
-            $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr)
+            $table -> add('tr', function(\Php2Core\GUI\NoHTML\Xhtml $tr)
             {
                 $tr -> add('th') -> text('Server');
                 $tr -> add('th') -> text('State');
@@ -205,7 +205,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
             
             foreach (array_keys($serversInstances) as $instance)
             {
-                $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($instance, $buffer, $ram, $serversInstances, $table)
+                $table -> add('tr', function(\Php2Core\GUI\NoHTML\Xhtml $tr) use($instance, $buffer, $ram, $serversInstances, $table)
                 {
                     $isActive = isset($buffer[$instance]);
                     

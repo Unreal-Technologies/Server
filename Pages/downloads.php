@@ -84,10 +84,10 @@ function treeRecursion(array $tree, Closure $callback)
     }
 }
 
-XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
+XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
 {
     //Set Title
-    $body -> get('div@.section/h6', function(\Php2Core\NoHTML\Xhtml $h6)
+    $body -> get('div@.section/h6', function(\Php2Core\GUI\NoHTML\Xhtml $h6)
     {
         $h6 -> clear();
         $h6 -> text('Downloads');
@@ -103,16 +103,16 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
     //Craft Tree
     $tree = tree($downloads);
     
-    $body -> add('div@.container/div@.row/div@.col s6 offset-s3', function(\Php2Core\NoHTML\Xhtml $col) use($tree)
+    $body -> add('div@.container/div@.row/div@.col s6 offset-s3', function(\Php2Core\GUI\NoHTML\Xhtml $col) use($tree)
     {
-        $col -> add('table@#directory-render', function(\Php2Core\NoHTML\Xhtml $table) use($tree)
+        $col -> add('table@#directory-render', function(\Php2Core\GUI\NoHTML\Xhtml $table) use($tree)
         {
             $width = $tree['width'];
             $table -> add('tr/th@colspan='.($width + 1)) -> text('Downloads');
 
             treeRecursion($tree['content'], function(array $data) use($table, $width)
             {
-                $table -> add('tr', function(\Php2Core\NoHTML\Xhtml $tr) use($data, $width)
+                $table -> add('tr', function(\Php2Core\GUI\NoHTML\Xhtml $tr) use($data, $width)
                 {
                     foreach($data['tags'] as $tag)
                     {
@@ -122,7 +122,7 @@ XHTML -> get('body', function(Php2Core\NoHTML\Xhtml $body)
                     $colspan = ($width + 1) - count($data['tags']);
                     if($data['type'] === 'file')
                     {
-                        $tr -> add('td@colspan='.$colspan.'/a@target=_blank', function(\Php2Core\NoHTML\Xhtml $a) use($data)
+                        $tr -> add('td@colspan='.$colspan.'/a@target=_blank', function(\Php2Core\GUI\NoHTML\Xhtml $a) use($data)
                         {
                             $path = $data['path'];
                             $relative = Php2Core::physicalToRelativePath($path);
