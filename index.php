@@ -45,7 +45,7 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     });
     $navBar -> navBar($body);
 
-    $targetFile = realpath(PHP2CORE -> get(\Php2Core::Root) -> path().'/Pages/'.ROUTE -> target()['target']);
+    $targetFile = realpath(PHP2CORE -> get(\Php2Core::Root) -> path().'/Pages/'.PHP2CORE -> get(Php2Core::Route) -> target()['target']);
     
     $body -> add('div@.section/h6') -> text('-title-');
     $body -> add('div@.divider');
