@@ -1,2 +1,2 @@
 <?php
-Php2Core::refresh(Php2Core::baseUrl().'/'.DEFAULT_ROUTE);
+PHP2CORE -> refresh(PHP2CORE -> baseUrl().'/'.DEFAULT_ROUTE);

@@ -1,10 +1,10 @@
 <?php
-$coreDbc = \Php2Core\Db\Database::getInstance('Php2Core');
+$coreDbc = \Php2Core\IO\Data\Db\Database::getInstance('Php2Core');
 
 //Create Instance
 $coreDbc -> query('insert into `instance`(`name`) '
     . 'values '
-    . '(\''.TITLE.'\')');
+    . '(\''. PHP2CORE -> get(Php2Core::Title).'\')');
 $instanceId =  $coreDbc -> execute()['iLastInsertId'];
 
 //Create Routes
