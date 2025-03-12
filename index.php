@@ -25,7 +25,7 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     $navBar -> link('Home', $baseUrl.'/home');
 //    $navBar -> link('Map Viewer', $baseUrl.'/mapViewer');
     $navBar -> link('Downloads', $baseUrl.'/downloads');
-    if(Php2Core::isAuthenticated())
+    if(PHP2CORE -> isAuthenticated())
     {
         $navBar -> submenu('Palworld', function(Php2Core\GUI\NoHTML\Materialize\Submenu $palworld) use($baseUrl)
         {
@@ -34,7 +34,7 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     }
     $navBar -> submenu('Account', function(Php2Core\GUI\NoHTML\Materialize\Submenu $account) use($baseUrl)
     {
-        if(!Php2Core::isAuthenticated())
+        if(!PHP2CORE -> isAuthenticated())
         {
             $account -> link('Login', $baseUrl.'/login');
         }
