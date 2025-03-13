@@ -54,6 +54,11 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     {
         include($targetFile);
     }
+    else
+    {
+        $route = PHP2CORE -> get(Php2Core::Route);
+        throw new Php2Core\Data\Exceptions\NotImplementedException(print_r($route, true));
+    }
     
     $body -> add('div@#copyright/a', function(\Php2Core\GUI\NoHTML\Xhtml $a)
     {

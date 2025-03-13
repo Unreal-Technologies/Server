@@ -15,7 +15,9 @@ if($xml instanceof Php2Core\IO\Xml\Document)
     $basePath = $options -> attributes()['path'];
 }
 
-if(ROUTE -> route()['method'] === 'post' && $worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
+$route = PHP2CORE -> get(Php2Core::Route);
+
+if($route -> route()['method'] === 'post' && $worldOptionsTempGvas instanceof \Php2Core\Gaming\Engines\Unreal\Gvas)
 {
     foreach(array_keys($_POST) as $key)
     {
