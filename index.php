@@ -1,4 +1,21 @@
 <?php
+$route = PHP2CORE -> get(\Php2Core::Route);
+$targetFile = $route -> file();
+$mode = $route -> mode();
+
+if($mode === Php2Core\Data\Route::Routingmode_Raw)
+{
+    if($targetFile !== null)
+    {
+        include($targetFile -> path());
+    }
+    else
+    {
+        throw new Php2Core\Data\Exceptions\NotImplementedException(print_r($route, true));
+    }
+    exit;
+}
+
 //Update Core Version to App Version
 $bVersion = PHP2CORE -> get(\Php2Core::Version);
 
@@ -17,7 +34,7 @@ XHTML -> get('head', function(Php2Core\GUI\NoHTML\Xhtml $head)
     });
 });
 
-XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
+XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body) use($route)
 {
     $baseUrl = PHP2CORE -> baseUrl();
     
@@ -48,7 +65,7 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     $body -> add('div@.section/h6') -> text('-title-');
     $body -> add('div@.divider');
 
-    $targetFile = PHP2CORE -> get(\Php2Core::Route) -> file();
+    $targetFile = $route -> file();
     
     if($targetFile !== null)
     {
@@ -56,7 +73,6 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
     }
     else
     {
-        $route = PHP2CORE -> get(Php2Core::Route);
         throw new Php2Core\Data\Exceptions\NotImplementedException(print_r($route, true));
     }
     
