@@ -125,7 +125,7 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body)
                         $tr -> add('td@colspan='.$colspan.'/a@target=_blank', function(\Php2Core\GUI\NoHTML\Xhtml $a) use($data)
                         {
                             $path = $data['path'];
-                            $relative = Php2Core::physicalToRelativePath($path);
+                            $relative = PHP2CORE -> physicalToRelativePath($path);
 
                             $a -> attributes() -> set('href', $relative);
 
