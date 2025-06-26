@@ -3,6 +3,16 @@ const SERVER_SEVENDAYSTODIE = '7 Days To Die';
 const SERVER_MINECRAFT = 'Minecraft';
 const SERVER_PALWORLD = 'Palworld';
 
+//$analyzer = new Php2Core\Source\Analyzer(
+//    \Php2Core\IO\Directory::fromDirectory(PHP2CORE -> get(PHP2CORE::Root), 'Php2Core/Source'), 
+//    [
+//        PHP2CORE -> get(PHP2CORE::Cache),
+//        PHP2CORE -> get(PHP2CORE::Temp)
+//    ]
+//);
+//
+//Php2Core::dump($analyzer);
+
 /**
  * @param int $seconds
  * @return string
