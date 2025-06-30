@@ -48,6 +48,10 @@ XHTML -> get('body', function(Php2Core\GUI\NoHTML\Xhtml $body) use($route)
         {
             $palworld -> link('World Options', $baseUrl.'/Palworld/WorldOptions');
         });
+        $navBar -> submenu('D&D', function(\Php2Core\GUI\NoHTML\Materialize\Submenu $dnd) use($baseUrl)
+        {
+            $dnd -> link('Items', $baseUrl.'/Dnd/Items');
+        });
     }
     $navBar -> submenu('Account', function(Php2Core\GUI\NoHTML\Materialize\Submenu $account) use($baseUrl)
     {

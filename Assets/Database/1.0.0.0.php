@@ -52,11 +52,19 @@ $routes = [
     [
         'default' => 'false',
         'method' => 'get',
-        'match' => 'Palworld/Players',
-        'target' => 'palworld/xhr/players.php',
+        'match' => 'DnD/Items',
+        'target' => 'DnD/Items/List.php',
         'mode' => 'full',
-        'auth' => 'false'
+        'auth' =>  'true'
     ],
+    [
+        'default' => 'false',
+        'method' => 'get',
+        'match' => 'DnD/Items/{type}',
+        'target' => 'DnD/Items/List.php',
+        'mode' => 'full',
+        'auth' =>  'true'
+    ]
 ];
 
 foreach($routes as $route)
